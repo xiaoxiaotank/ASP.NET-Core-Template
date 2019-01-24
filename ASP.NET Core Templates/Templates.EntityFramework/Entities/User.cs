@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Templates.EntityFrameworkCore.Models
+namespace Templates.EntityFrameworkCore.Entities
 {
     public class User
     {

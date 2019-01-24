@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.EntityFrameworkCore.Migrations
 {

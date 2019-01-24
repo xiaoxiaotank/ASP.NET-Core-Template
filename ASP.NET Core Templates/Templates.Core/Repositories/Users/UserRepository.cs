@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.Core.Repositories.Users
 {

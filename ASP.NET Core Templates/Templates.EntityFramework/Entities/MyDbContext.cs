@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 
-namespace Templates.EntityFrameworkCore.Models
+namespace Templates.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// add-migration [name]

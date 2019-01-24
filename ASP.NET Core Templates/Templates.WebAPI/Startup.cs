@@ -13,11 +13,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Templates.Application.Users;
 using Templates.Common.Extensions;
 using Templates.Core.Repositories.Users;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 using Templates.WebAPI.Attributes.Filters;
 
 [assembly: ApiController]
@@ -64,9 +65,10 @@ namespace Templates.WebAPI
 
             services.AddMvc(options => 
             {
-                options.Filters.Add(new ExceptionHandlerFilterAttribute(HostEnvironment));
-                options.Filters.Add(new ModelStateValidationFilterAttribute());
-                
+                options.Filters.Add<ExceptionHandlerFilterAttribute>();
+                options.Filters.Add<ModelStateValidationFilterAttribute>();
+
+
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .ConfigureApiBehaviorOptions(options =>
@@ -91,7 +93,8 @@ namespace Templates.WebAPI
         /// 该方法由运行时调用，用来配置HTTP请求管道（中间件）
         /// </summary>
         /// <param name="app"></param>
-        public void Configure(IApplicationBuilder app)
+        /// <param name="loggerFactory"></param>
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             if (HostEnvironment.IsDevelopment())
             {
@@ -106,6 +109,9 @@ namespace Templates.WebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            loggerFactory.AddNLog();
+            NLog.LogManager.LoadConfiguration("Configs/nlog.config");
 
             app.UseAuthentication();
             app.UseHttpsRedirection();

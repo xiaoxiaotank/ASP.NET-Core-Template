@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.Application.Users
 {

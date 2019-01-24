@@ -5,10 +5,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Templates.Application.Users;
 using Templates.Common.Enums;
 using Templates.Common.Extensions;
-using Templates.EntityFrameworkCore.Models;
+using Templates.EntityFrameworkCore.Entities;
 using Templates.WebAPI.Dtos.Users;
 
 namespace Templates.WebAPI.Controllers
@@ -17,15 +18,18 @@ namespace Templates.WebAPI.Controllers
     public class UsersController : ApiController
     {
         private readonly IUserAppService _userAppService;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUserAppService userAppService)
+        public UsersController(IUserAppService userAppService, ILogger<UsersController> logger)
         {
             _userAppService = userAppService;
+            _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<UserDto> Get()
         {
+            _logger.LogInformation("获取所有用户");
             return _userAppService.Get().Select(u => (UserDto)u);
         }
 

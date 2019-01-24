@@ -65,11 +65,12 @@
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:Templates.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:Templates.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             该方法由运行时调用，用来配置HTTP请求管道（中间件）
             </summary>
             <param name="app"></param>
+            <param name="loggerFactory"></param>
         </member>
     </members>
 </doc>
