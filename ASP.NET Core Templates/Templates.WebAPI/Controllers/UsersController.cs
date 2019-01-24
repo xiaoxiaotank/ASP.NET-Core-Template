@@ -20,7 +20,9 @@ namespace Templates.WebAPI.Controllers
         private readonly IUserAppService _userAppService;
         private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUserAppService userAppService, ILogger<UsersController> logger)
+        public UsersController(
+            IUserAppService userAppService, 
+            ILogger<UsersController> logger)
         {
             _userAppService = userAppService;
             _logger = logger;
@@ -44,8 +46,7 @@ namespace Templates.WebAPI.Controllers
         public IEnumerable<UserDto> Get([FromQuery]int page = 1, [FromQuery]int size = 20)
         {
             return _userAppService.Get()
-                .Skip((page - 1) * size)
-                .Take(size)
+                .Paged(page, size)
                 .Select(u => (UserDto)u);
         }
 

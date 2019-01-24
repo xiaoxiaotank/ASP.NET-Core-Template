@@ -5,11 +5,14 @@ using System.Linq.Expressions;
 using System.Text;
 using Templates.Core.Repositories.Users;
 using Templates.EntityFrameworkCore.Entities;
+using System.Security.Cryptography;
+using Templates.Common.Helpers;
 
 namespace Templates.Application.Users
 {
     public class UserAppService : IUserAppService
     {
+        private readonly Encoding encoding = Encoding.UTF8;
         private readonly IUserRepository _userRepository;
 
         public UserAppService(IUserRepository userRepository)
@@ -35,13 +38,14 @@ namespace Templates.Application.Users
 
         public User Login(string userNameOrEmail, string password)
         {
+            password = CryptographyHelper.EncryptByMD5(password);
             return _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && u.Password.Equals(password))
                 .FirstOrDefault();
         }
 
         public User Create(User user)
         {
-            user.Password = "123456";
+            user.Password = CryptographyHelper.EncryptByMD5("123456");
             return _userRepository.Insert(user);
         }
 

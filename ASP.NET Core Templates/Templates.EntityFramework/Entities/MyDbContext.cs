@@ -34,7 +34,7 @@ namespace Templates.EntityFrameworkCore.Entities
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(32);
+                    .HasMaxLength(128);
 
                 entity.Property(e => e.Name)
                     .IsRequired()

@@ -5,7 +5,7 @@ using Templates.Common.Models;
 
 namespace Templates.Common.Helpers
 {
-    public class JwtBearerHelper
+    public sealed class JwtBearerHelper
     {
         public static TokenModel GetTokenModel(string token)
         {

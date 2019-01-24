@@ -7,23 +7,11 @@ namespace System.Linq
 {
     public static class CollectionExtensions
     {
-        /// <summary>
-        /// 判断集合是否为null或空
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <returns></returns>
         public static bool IsNullOrEmpty<TSource>(this IEnumerable<TSource> source)
         {
             return source == null || !source.Any();
         }
 
-        /// <summary>
-        /// 判断集合是否不为null和空
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <returns></returns>
         public static bool IsNotNullAndEmpty<TSource>(this IEnumerable<TSource> source)
         {
             return source != null && source.Any();
@@ -57,16 +45,14 @@ namespace System.Linq
             return dic != null && key != null && dic.ContainsKey(key);
         }
 
-        /// <summary>
-        /// 通过使用默认的相等比较器确定序列是否 不包含 指定的元素
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static bool NotContains<TSource>(this IEnumerable<TSource> source, TSource value)
         {
             return !source.Contains(value);
+        }
+
+        public static IQueryable<T> Paged<T>(this IQueryable<T> source, int page, int size)
+        {
+            return source.Skip((page - 1) * size).Take(size);
         }
     }
 }
