@@ -19,12 +19,21 @@ namespace Templates.WebAPI.Dtos.Users
 
         public string Email { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+        public DateTime? CreationTime { get; set; }
+
+        public DateTime? DeletionTime { get; set; }
+
         private UserDto(User entity)
         {
             Id = entity.Id;
             UserName = entity.UserName;
             Name = entity.Name;
             Email = entity.Email;
+            IsDeleted = entity.IsDeleted;
+            CreationTime = entity.CreationTime;
+            DeletionTime = entity.DeletionTime;
         }
 
         public static implicit operator UserDto(User entity) => new UserDto(entity);

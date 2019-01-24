@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Templates.Core.Repositories
@@ -21,40 +23,54 @@ namespace Templates.Core.Repositories
             return _dbSet.Find(id);
         }
 
-        public virtual IEnumerable<TEntity> Get(Func<TEntity, bool> selector)
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dbSet.AsNoTracking().Where(predicate);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual IQueryable<TEntity> Get()
         {
-            throw new NotImplementedException();
+            return _dbSet.AsNoTracking();
+        }
+
+        public virtual TEntity Insert(TEntity entity)
+        {
+            var entry = _dbSet.Add(entity);
+            Save();
+            return entry.Entity;
         }
 
         public virtual void Insert(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.AddRange(entities);
+            Save();
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var entry = _dbSet.Update(entity);
+            Save();
+            return entry.Entity;
         }
 
         public virtual void Update(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.UpdateRange(entities);
+            Save();
         }
     
-        public virtual void Delete(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+            return Save();
         }
 
-        public virtual void Delete(IEnumerable<TEntity> entities)
+        public virtual int Delete(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(entities);
+            return Save();
         }
 
+        protected virtual int Save() => _ctx.SaveChanges();
     }
 }

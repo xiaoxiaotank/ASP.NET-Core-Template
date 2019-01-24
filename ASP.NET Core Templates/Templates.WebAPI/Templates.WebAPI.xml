@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Templates.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Templates.WebAPI.Attributes.Filters.ExceptionHandlerFilterAttribute">
+            <summary>
+            异常处理过滤器（捕获会话所有异常）
+            </summary>
+        </member>
+        <member name="T:Templates.WebAPI.Attributes.Filters.ModelStateValidationFilterAttribute">
+            <summary>
+            模型验证过滤器
+            2.1 later 版本框架自动注册了全局模型验证
+            </summary>
+        </member>
+        <member name="M:Templates.WebAPI.Controllers.AccountsController.Login(Templates.WebAPI.Dtos.Accounts.LoginDto)">
+            <summary>
+            登录
+            使用GET会导致密码显示在URL中
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Templates.WebAPI.Controllers.ApiController.GetQueryExpression``1(System.Object,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="isComplete">指示查询表达式是否已完成</param>
+            <returns></returns>
+        </member>
+        <member name="M:Templates.WebAPI.Controllers.UsersController.Get(System.Int32)">
+            <summary>
+            根据id获取用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <resonse code="404">指定id的用户不存在</resonse>
+        </member>
+        <member name="M:Templates.WebAPI.Controllers.UsersController.Post(Templates.WebAPI.Dtos.Users.UserPostDto)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Templates.WebAPI.Dtos.Users.UserDto">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="T:Templates.WebAPI.Dtos.Users.UserPostDto">
+            <summary>
+            用户创建
+            </summary>
+        </member>
+        <member name="M:Templates.WebAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            该方法由运行时调用，用来向容器添加服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Templates.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            该方法由运行时调用，用来配置HTTP请求管道（中间件）
+            </summary>
+            <param name="app"></param>
+        </member>
+    </members>
+</doc>

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Templates.Core\Templates.Core.csproj" />
+    <ProjectReference Include="..\Templates.EntityFramework\Templates.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
 </Project>

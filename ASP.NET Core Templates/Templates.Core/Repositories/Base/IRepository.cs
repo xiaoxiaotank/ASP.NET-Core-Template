@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Templates.Core.Repositories
@@ -11,19 +13,21 @@ namespace Templates.Core.Repositories
     {
         TEntity Get(TKey id);
 
-        IEnumerable<TEntity> Get(Func<TEntity, bool> selector);
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
 
-        void Insert(TEntity entity);
+        IQueryable<TEntity> Get();
+
+        TEntity Insert(TEntity entity);
 
         void Insert(IEnumerable<TEntity> entities);
 
-        void Update(TEntity entity);
+        TEntity Update(TEntity entity);
 
         void Update(IEnumerable<TEntity> entities);
 
-        void Delete(TEntity entity);
+        int Delete(TEntity entity);
 
-        void Delete(IEnumerable<TEntity> entities);
+        int Delete(IEnumerable<TEntity> entities);
     }
 
     public interface IRepository<TEntity> : IRepository<TEntity, int>

@@ -10,7 +10,7 @@ namespace Templates.WebAPI.Dtos.Users
     /// <summary>
     /// 用户创建
     /// </summary>
-    public class UserCreateDto
+    public class UserPostDto
     {
         [Required, MinLength(2), MaxLength(8)]
         public string UserName { get; set; }

@@ -1,44 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Templates.Application.Users;
+using Templates.Common.Enums;
+using Templates.Common.Extensions;
 using Templates.EntityFrameworkCore.Models;
 using Templates.WebAPI.Dtos.Users;
 
 namespace Templates.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : ApiController
     {
-        public UsersController()
+        private readonly IUserAppService _userAppService;
+
+        public UsersController(IUserAppService userAppService)
         {
-            
+            _userAppService = userAppService;
         }
 
         [HttpGet]
         public IEnumerable<UserDto> Get()
         {
-            var results = new User[]
-            {
-                new User
-                {
-                    Id = 1,
-                    UserName = "xiao",
-                    Name = "jjj",
-                    Email = "jjj@test.com"
-                },
-                new User
-                {
-                    Id = 2,
-                    UserName = "feng",
-                    Name = "lll",
-                    Email = "lll@test.com"
-                }
-            }.Select(u => (UserDto)u);
-            return results;
+            return _userAppService.Get().Select(u => (UserDto)u);
+        }
+
+        [HttpGet("getby")]
+        public IEnumerable<UserDto> Get([FromBody]UserQueryDto query)
+        {
+            var queryExp = GetQueryExpression(query);
+            return _userAppService.Get(queryExp).Select(u => (UserDto)u);
         }
 
         /// <summary>
@@ -46,44 +41,85 @@ namespace Templates.WebAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// <response code="200">返回指定id的用户</response>
         /// <resonse code="404">指定id的用户不存在</resonse>
         [HttpGet("{id}")]
-        //用于Swagger
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UserDto> Get(int id)
+        public ActionResult<UserDto> Get([FromRoute]int id)
         {
-            if(id < 1)
+            var user = _userAppService.Get(id);
+            if(user == null)
             {
                 return NotFound();
             }
-
-            UserDto result = new User
-            {
-                Id = id,
-                UserName = "TestUserName",
-                Name = "TestName",
-                Email = "TestEmail"
-            };
-            return result;
+            return (UserDto)user;
         }
 
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult<UserDto> Post([FromBody]UserCreateDto dto)
+        public ActionResult<UserDto> Post([FromBody]UserPostDto dto)
         {
-            //return CreatedAtAction(nameof(Get), new { dto })
-            return Ok();
+            UserDto result = _userAppService.Create(new User
+            {
+                UserName = dto.UserName,
+                Name = dto.Name,
+            });
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public void Put([FromBody]UserPutDto dto)
+        {
+
+        }
+
+        [HttpPatch]
+        public void Patch([FromBody]UserPatchDto dto)
         {
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete([FromRoute]int id)
         {
+            _userAppService.Delete(id);
         }
+
+        [HttpDelete]
+        public void Delete([FromQuery]IEnumerable<int> ids)
+        {
+            _userAppService.Delete(ids);
+        }
+
+        #region NoActions
+
+        [NonAction]
+        public Expression<Func<User, bool>> GetQueryExpression(UserQueryDto query)
+        {
+            var queryExp = GetQueryExpression<User>(query, out bool isComplete);
+            if (isComplete)
+            {
+                return queryExp;
+            }
+
+            var rights = new List<Expression<Func<User, bool>>>();
+
+            if (query.UserName.IsNotNullAndEmpty())
+                rights.Add(u => u.UserName.Contains(query.UserName));
+            if (query.Name.IsNotNullAndEmpty())
+                rights.Add(u => u.Name.Contains(query.Name));
+            if (query.StartCreationTime.HasValue)
+                rights.Add(u => u.CreationTime >= query.StartCreationTime);
+            if (query.StopCreateionTime.HasValue)
+                rights.Add(u => u.CreationTime <= query.StopCreateionTime);
+
+            return queryExp.AndAlso(rights);
+        }
+
+        #endregion
     }
 }
