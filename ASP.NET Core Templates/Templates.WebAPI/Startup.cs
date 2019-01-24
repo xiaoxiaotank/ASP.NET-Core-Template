@@ -95,7 +95,6 @@ namespace Templates.WebAPI
         {
             if (HostEnvironment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {

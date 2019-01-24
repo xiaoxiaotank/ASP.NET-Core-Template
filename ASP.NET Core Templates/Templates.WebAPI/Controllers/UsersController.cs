@@ -36,6 +36,25 @@ namespace Templates.WebAPI.Controllers
             return _userAppService.Get(queryExp).Select(u => (UserDto)u);
         }
 
+        [HttpGet("page")]
+        public IEnumerable<UserDto> Get([FromQuery]int page = 1, [FromQuery]int size = 20)
+        {
+            return _userAppService.Get()
+                .Skip((page - 1) * size)
+                .Take(size)
+                .Select(u => (UserDto)u);
+        }
+
+        [HttpGet("pageby")]
+        public IEnumerable<UserDto> Get([FromBody]UserQueryDto query, [FromQuery]int page = 1, [FromQuery]int size = 20)
+        {
+            var queryExp = GetQueryExpression(query);
+            return _userAppService.Get(queryExp)
+                .Skip((page - 1) * size)
+                .Take(size)
+                .Select(u => (UserDto)u);
+        }
+
         /// <summary>
         /// 根据id获取用户
         /// </summary>
@@ -75,7 +94,12 @@ namespace Templates.WebAPI.Controllers
         [HttpPut]
         public void Put([FromBody]UserPutDto dto)
         {
-
+            _userAppService.Update(new User
+            {
+                Id = dto.Id.Value,
+                Name = dto.Name,
+                Gender = dto.Gender
+            });
         }
 
         [HttpPatch]
@@ -100,7 +124,7 @@ namespace Templates.WebAPI.Controllers
         [NonAction]
         public Expression<Func<User, bool>> GetQueryExpression(UserQueryDto query)
         {
-            var queryExp = GetQueryExpression<User>(query, out bool isComplete);
+            var queryExp = GetQueryExpression<User, UserQueryDto>(query, out bool isComplete);
             if (isComplete)
             {
                 return queryExp;

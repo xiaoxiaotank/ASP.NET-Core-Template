@@ -18,20 +18,20 @@ namespace Templates.Core.Repositories
             _dbSet = _ctx.Set<TEntity>();
         }
 
-        public virtual TEntity Get(int id)
-        {
-            return _dbSet.Find(id);
-        }
+        public int Count() => _dbSet.Count();
+
+        public int Count(Expression<Func<TEntity, bool>> predicate) => _dbSet.Count(predicate);
+
+        public long LongCount() => _dbSet.LongCount();
+
+        public long LongCount(Expression<Func<TEntity, bool>> predicate) => _dbSet.LongCount();
+
+        public virtual TEntity Get(int id) => _dbSet.Find(id);
 
         public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
-        {
-            return _dbSet.AsNoTracking().Where(predicate);
-        }
+            => _dbSet.AsNoTracking().Where(predicate);
 
-        public virtual IQueryable<TEntity> Get()
-        {
-            return _dbSet.AsNoTracking();
-        }
+        public virtual IQueryable<TEntity> Get() => _dbSet.AsNoTracking();
 
         public virtual TEntity Insert(TEntity entity)
         {
@@ -72,5 +72,6 @@ namespace Templates.Core.Repositories
         }
 
         protected virtual int Save() => _ctx.SaveChanges();
+
     }
 }

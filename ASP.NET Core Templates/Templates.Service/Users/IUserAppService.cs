@@ -15,6 +15,8 @@ namespace Templates.Application.Users
 
         IQueryable<User> Get();
 
+        User Login(string userNameOrEmail, string password);
+
         User Create(User user);
 
         User Update(User user);

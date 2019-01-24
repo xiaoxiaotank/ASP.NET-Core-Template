@@ -33,14 +33,29 @@ namespace Templates.Application.Users
             return _userRepository.Get();
         }
 
+        public User Login(string userNameOrEmail, string password)
+        {
+            return _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && u.Password.Equals(password))
+                .FirstOrDefault();
+        }
+
         public User Create(User user)
         {
+            user.Password = "123456";
             return _userRepository.Insert(user);
         }
 
         public User Update(User user)
         {
-            return _userRepository.Update(user);
+            var origUser = _userRepository.Get(user.Id);
+            if(origUser == null)
+            {
+                throw new NotFoundException();
+            }
+
+            origUser.Name = user.Name;
+            origUser.Gender = user.Gender;
+            return _userRepository.Update(origUser);
         }
 
         public void Delete(int id)
@@ -52,5 +67,6 @@ namespace Templates.Application.Users
         {
             _userRepository.Delete(_userRepository.Get(u => ids.Contains(u.Id)));
         }
+
     }
 }

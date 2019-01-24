@@ -14,7 +14,6 @@ namespace Templates.Core.Repositories.Users
 
         public override User Insert(User entity)
         {
-            entity.Password = "123456";
             entity.CreationTime = DateTime.Now;
             return base.Insert(entity);
         }

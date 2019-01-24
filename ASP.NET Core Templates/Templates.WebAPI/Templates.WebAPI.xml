@@ -15,19 +15,21 @@
             2.1 later 版本框架自动注册了全局模型验证
             </summary>
         </member>
-        <member name="M:Templates.WebAPI.Controllers.AccountsController.Login(Templates.WebAPI.Dtos.Accounts.LoginDto)">
+        <member name="M:Templates.WebAPI.Controllers.AccountsController.Login(Templates.WebAPI.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             登录
             使用GET会导致密码显示在URL中
             </summary>
             <param name="dto"></param>
+            <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebAPI.Controllers.ApiController.GetQueryExpression``1(System.Object,System.Boolean@)">
+        <member name="M:Templates.WebAPI.Controllers.ApiController.GetQueryExpression``2(``1,System.Boolean@)">
             <summary>
             
             </summary>
             <typeparam name="T"></typeparam>
+            <typeparam name="TQueryDto"></typeparam>
             <param name="query"></param>
             <param name="isComplete">指示查询表达式是否已完成</param>
             <returns></returns>

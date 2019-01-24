@@ -11,6 +11,14 @@ namespace Templates.Core.Repositories
         where TEntity : class
         where TKey : IEquatable<TKey>
     {
+        int Count();
+
+        int Count(Expression<Func<TEntity, bool>> predicate);
+
+        long LongCount();
+
+        long LongCount(Expression<Func<TEntity, bool>> predicate);
+
         TEntity Get(TKey id);
 
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);

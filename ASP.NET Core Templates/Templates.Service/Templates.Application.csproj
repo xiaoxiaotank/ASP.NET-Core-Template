@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Templates.Common\Templates.Common.csproj" />
     <ProjectReference Include="..\Templates.Core\Templates.Core.csproj" />
     <ProjectReference Include="..\Templates.EntityFramework\Templates.EntityFrameworkCore.csproj" />
   </ItemGroup>

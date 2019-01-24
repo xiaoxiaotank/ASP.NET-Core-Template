@@ -19,6 +19,7 @@ namespace Templates.WebAPI.Attributes.Filters
         {
             [typeof(TimeoutException)] = (StatusCodes.Status408RequestTimeout, "Request Timeout"),
             [typeof(UnauthorizedAccessException)] = (StatusCodes.Status401Unauthorized, "Unauthorized request"),
+            [typeof(NotFoundException)] = (StatusCodes.Status404NotFound, "Not found"),
         };
         private readonly IHostingEnvironment _env;
 

@@ -7,6 +7,10 @@ using Templates.EntityFrameworkCore.Models;
 
 namespace Templates.EntityFrameworkCore.Models
 {
+    /// <summary>
+    /// add-migration [name]
+    /// update-database
+    /// </summary>
     public class MyDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }

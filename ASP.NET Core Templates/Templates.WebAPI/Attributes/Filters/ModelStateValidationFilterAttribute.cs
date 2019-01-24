@@ -17,9 +17,10 @@ namespace Templates.WebAPI.Attributes.Filters
         {
             if (context.ModelState.IsValid) return;
 
-            var errorMessage = string.Join(
-                Environment.NewLine, 
-                context.ModelState.Select(kvp => $"{kvp.Key}: {kvp.Value.Errors.First().ErrorMessage}"));
+            var errors = context.ModelState.Where(kvp => kvp.Value.Errors.Any())
+                .Select(kvp => $"{kvp.Key}: {kvp.Value.Errors.First().ErrorMessage}");
+            var errorMessage = string.Join(Environment.NewLine, errors);
+
             context.Result = new BadRequestObjectResult(errorMessage);
         }
     }
