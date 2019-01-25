@@ -18,7 +18,7 @@ namespace Templates.WebAPI.Attributes.Filters
             if (context.ModelState.IsValid) return;
 
             var errors = context.ModelState.Where(kvp => kvp.Value.Errors.Any())
-                .Select(kvp => $"{kvp.Key}: {kvp.Value.Errors.First().ErrorMessage}");
+                .Select(kvp => kvp.Value.Errors.First().ErrorMessage);
             var errorMessage = string.Join(Environment.NewLine, errors);
 
             context.Result = new BadRequestObjectResult(errorMessage);

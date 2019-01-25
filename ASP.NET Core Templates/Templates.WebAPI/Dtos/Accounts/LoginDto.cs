@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Templates.WebAPI.Resources;
 
 namespace Templates.WebAPI.Dtos.Accounts
 {
     public class LoginDto
     {
+        [Display(Name = "用户名或邮箱")]
         public string UserNameOrEmail { get; set; }
 
+        [Display(Name = "密码")]
         public string Password { get; set; }
     }
 
@@ -18,8 +21,8 @@ namespace Templates.WebAPI.Dtos.Accounts
     {
         public LoginValidator()
         {
-            RuleFor(m => m.UserNameOrEmail).NotEmpty();
-            RuleFor(m => m.Password).NotEmpty();
+            RuleFor(m => m.UserNameOrEmail).NotEmpty().WithMessage(Validation.NotEmpty);
+            RuleFor(m => m.Password).NotEmpty().WithMessage(Validation.NotEmpty);
         }
     }
 }

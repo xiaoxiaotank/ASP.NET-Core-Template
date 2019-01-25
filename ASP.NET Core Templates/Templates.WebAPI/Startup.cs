@@ -88,8 +88,15 @@ namespace Templates.WebAPI
                 //如果发生404响应，则转到相应连接
                 //options.ClientErrorMapping[404].Link = "https://webapi根本不需要.com/404";
             })
-            //注册 Startup 所属程序集下所有的 public nonabstract Validators
-            .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<Startup>());
+            .AddFluentValidation(config => 
+            {
+                //注册 Startup 所属程序集下所有的 public nonabstract Validators
+                config.RegisterValidatorsFromAssemblyContaining<Startup>();
+                //禁用 DataAnnotations 和 IValidatableObject
+                config.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                //验证复杂对象时不再(不应，否则执行两次)需要使用 SetValidator 
+                config.ImplicitlyValidateChildProperties = true;
+            });
         }
 
         /// <summary>
