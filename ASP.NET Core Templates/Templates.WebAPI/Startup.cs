@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -86,7 +87,9 @@ namespace Templates.WebAPI
 
                 //如果发生404响应，则转到相应连接
                 //options.ClientErrorMapping[404].Link = "https://webapi根本不需要.com/404";
-            });
+            })
+            //注册 Startup 所属程序集下所有的 public nonabstract Validators
+            .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         /// <summary>
@@ -98,6 +101,7 @@ namespace Templates.WebAPI
         {
             if (HostEnvironment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FluentValidation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,10 +13,17 @@ namespace Templates.WebAPI.Dtos.Users
     /// </summary>
     public class UserPostDto
     {
-        [Required, MinLength(2), MaxLength(8)]
         public string UserName { get; set; }
 
-        [Required, MinLength(2), MaxLength(4)]
         public string Name { get; set; }
+    }
+
+    public class UserPostValidator : AbstractValidator<UserPostDto>
+    {
+        public UserPostValidator()
+        {
+            RuleFor(m => m.UserName).NotNull().Length(2, 8);
+            RuleFor(m => m.Name).NotNull().Length(2, 4);
+        }
     }
 }

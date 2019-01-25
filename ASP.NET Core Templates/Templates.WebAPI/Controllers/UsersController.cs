@@ -101,7 +101,7 @@ namespace Templates.WebAPI.Controllers
         {
             _userAppService.Update(new User
             {
-                Id = dto.Id.Value,
+                Id = dto.Id,
                 Name = dto.Name,
                 Gender = dto.Gender
             });

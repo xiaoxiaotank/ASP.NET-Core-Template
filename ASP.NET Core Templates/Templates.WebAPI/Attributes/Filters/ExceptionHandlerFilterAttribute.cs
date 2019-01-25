@@ -37,7 +37,13 @@ namespace Templates.WebAPI.Attributes.Filters
             _logger.LogError(exception, exception.Message);
             var result = new ObjectResult("An error has occurred.");
 
-            if (_mappingDic.TryGetValue(exception.GetType(), out var tuple))
+            if (exception is AppException)
+            {
+                var ex = exception as AppException;
+                result.StatusCode = StatusCodes.Status200OK;
+                result.Value = ex.Message;
+            }
+            else if (_mappingDic.TryGetValue(exception.GetType(), out var tuple))
             {
                 result.StatusCode = tuple.StatusCode;
                 result.Value = tuple.Value;
