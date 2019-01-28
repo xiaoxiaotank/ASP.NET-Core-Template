@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Templates.WebAPI.Attributes.Filters
+namespace Templates.WebApi.Core.Attributes.Filters
 {
     /// <summary>
     /// 模型验证过滤器

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace System
 {
+    [Serializable]
     public class AppException : Exception
     {
         public AppException() { }

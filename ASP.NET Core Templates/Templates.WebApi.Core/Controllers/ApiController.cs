@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using IdentityModel;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using IdentityModel;
 using Microsoft.AspNetCore.Mvc;
-using Templates.WebAPI.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text;
+using Templates.WebApi.Core.Dtos;
+using Templates.WebApi.Core.Entities;
 
-namespace Templates.WebAPI.Controllers
+namespace Templates.WebApi.Core.Controllers
 {
     [Route("api")]
     [Produces("application/json")]
@@ -28,14 +26,18 @@ namespace Templates.WebAPI.Controllers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TQueryDto"></typeparam>
-        /// <param name="query"></param>
-        /// <param name="isComplete">指示查询表达式是否已完成</param>
+        /// <param name="queryDto"></param>
+        /// <param name="queryExp"></param>
         /// <returns></returns>
         [NonAction]
-        public Expression<Func<T, bool>> GetQueryExpression<T, TQueryDto>(TQueryDto query, out bool isComplete) where TQueryDto : class
+        protected bool IsQueryExpressionComplete<T, TQueryDto>(TQueryDto queryDto, ref Expression<Func<T, bool>> queryExp) where TQueryDto : QueryDto
         {
-            isComplete = query == null;
-            return t => true;
+            if (queryExp == null)
+            {
+                queryExp = t => true;
+            }
+
+            return queryDto == null;
         }
     }
 }

@@ -10,9 +10,10 @@ using Templates.Application.Users;
 using Templates.Common.Enums;
 using Templates.Common.Extensions;
 using Templates.EntityFrameworkCore.Entities;
-using Templates.WebAPI.Dtos.Users;
+using Templates.WebApi.Core.Controllers;
+using Templates.WebApi.Dtos.Users;
 
-namespace Templates.WebAPI.Controllers
+namespace Templates.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class UsersController : ApiController
@@ -127,9 +128,9 @@ namespace Templates.WebAPI.Controllers
         #region NoActions
 
         [NonAction]
-        public Expression<Func<User, bool>> GetQueryExpression(UserQueryDto query)
+        public Expression<Func<User, bool>> GetQueryExpression(UserQueryDto query, Expression<Func<User, bool>> queryExp = null)
         {
-            var queryExp = GetQueryExpression<User, UserQueryDto>(query, out bool isComplete);
+            var isComplete = IsQueryExpressionComplete(query, ref queryExp);
             if (isComplete)
             {
                 return queryExp;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Templates.WebAPI.Resources {
+namespace Templates.WebApi.Core.Resources {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Templates.WebAPI.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Validation {
+    public class Validation {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Templates.WebAPI.Resources {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Templates.WebAPI.Resources.Validation", typeof(Validation).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Templates.WebApi.Core.Resources.Validation", typeof(Validation).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Templates.WebAPI.Resources {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Templates.WebAPI.Resources {
         /// <summary>
         ///   查找类似 {PropertyName}不是正确的邮箱格式 的本地化字符串。
         /// </summary>
-        internal static string EmailAddress {
+        public static string EmailAddress {
             get {
                 return ResourceManager.GetString("EmailAddress", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Templates.WebAPI.Resources {
         /// <summary>
         ///   查找类似 {PropertyName}应为{MinLength}到{MaxLength}个字符 的本地化字符串。
         /// </summary>
-        internal static string Length {
+        public static string Length {
             get {
                 return ResourceManager.GetString("Length", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Templates.WebAPI.Resources {
         /// <summary>
         ///   查找类似 {PropertyName}是必填的 的本地化字符串。
         /// </summary>
-        internal static string NotEmpty {
+        public static string NotEmpty {
             get {
                 return ResourceManager.GetString("NotEmpty", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Templates.WebAPI.Resources {
         /// <summary>
         ///   查找类似 {PropertyName}不能为空 的本地化字符串。
         /// </summary>
-        internal static string NotNull {
+        public static string NotNull {
             get {
                 return ResourceManager.GetString("NotNull", resourceCulture);
             }

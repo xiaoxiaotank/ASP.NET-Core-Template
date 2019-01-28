@@ -20,10 +20,10 @@ using Templates.Application.Users;
 using Templates.Common.Extensions;
 using Templates.Core.Repositories.Users;
 using Templates.EntityFrameworkCore.Entities;
-using Templates.WebAPI.Attributes.Filters;
+using Templates.WebApi.Core.Attributes.Filters;
 
 [assembly: ApiController]
-namespace Templates.WebAPI
+namespace Templates.WebApi
 {
     public class Startup
     {

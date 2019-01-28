@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Templates.WebApi.Dtos.Accounts
+namespace Templates.WebApi.Core.Dtos
 {
-    public class ChangePasswordDto
+    public class QueryDto : DtoBase
     {
-
     }
-
 }

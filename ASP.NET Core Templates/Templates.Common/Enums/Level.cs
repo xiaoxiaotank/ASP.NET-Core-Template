@@ -27,6 +27,7 @@ namespace Templates.Common.Enums
 
         Six = 0x20,
 
+        [EnumMember(Value = "7")]
         Seven = 0x40,
 
         Eight = 0x80,

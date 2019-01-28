@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Templates.EntityFrameworkCore.Entities;
 
-namespace Templates.WebAPI.Dtos.Users
+namespace Templates.WebApi.Dtos.Users
 {
     /// <summary>
     /// 用户

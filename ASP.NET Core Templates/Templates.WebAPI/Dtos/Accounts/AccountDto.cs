@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Templates.EntityFrameworkCore.Entities;
 
-namespace Templates.WebAPI.Dtos.Accounts
+namespace Templates.WebApi.Dtos.Accounts
 {
     public class AccountDto
     {

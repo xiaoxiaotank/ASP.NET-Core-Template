@@ -1,21 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Templates.WebAPI</name>
+        <name>Templates.WebApi</name>
     </assembly>
     <members>
-        <member name="T:Templates.WebAPI.Attributes.Filters.ExceptionHandlerFilterAttribute">
-            <summary>
-            异常处理过滤器（捕获会话所有异常）
-            </summary>
-        </member>
-        <member name="T:Templates.WebAPI.Attributes.Filters.ModelStateValidationFilterAttribute">
-            <summary>
-            模型验证过滤器
-            2.1 later 版本框架自动注册了全局模型验证
-            </summary>
-        </member>
-        <member name="M:Templates.WebAPI.Controllers.AccountsController.Login(Templates.WebAPI.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Templates.WebApi.Controllers.AccountsController.Login(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             登录
             使用GET会导致密码显示在URL中
@@ -24,17 +13,7 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebAPI.Controllers.ApiController.GetQueryExpression``2(``1,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="TQueryDto"></typeparam>
-            <param name="query"></param>
-            <param name="isComplete">指示查询表达式是否已完成</param>
-            <returns></returns>
-        </member>
-        <member name="M:Templates.WebAPI.Controllers.UsersController.Get(System.Int32)">
+        <member name="M:Templates.WebApi.Controllers.UsersController.Get(System.Int32)">
             <summary>
             根据id获取用户
             </summary>
@@ -42,66 +21,30 @@
             <returns></returns>
             <resonse code="404">指定id的用户不存在</resonse>
         </member>
-        <member name="M:Templates.WebAPI.Controllers.UsersController.Post(Templates.WebAPI.Dtos.Users.UserPostDto)">
+        <member name="M:Templates.WebApi.Controllers.UsersController.Post(Templates.WebApi.Dtos.Users.UserPostDto)">
             <summary>
             添加用户
             </summary>
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="T:Templates.WebAPI.Dtos.Users.UserDto">
+        <member name="T:Templates.WebApi.Dtos.Users.UserDto">
             <summary>
             用户
             </summary>
         </member>
-        <member name="T:Templates.WebAPI.Dtos.Users.UserPostDto">
+        <member name="T:Templates.WebApi.Dtos.Users.UserPostDto">
             <summary>
             用户创建
             </summary>
         </member>
-        <member name="T:Templates.WebAPI.Resources.Validation">
-            <summary>
-              一个强类型的资源类，用于查找本地化的字符串等。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.ResourceManager">
-            <summary>
-              返回此类使用的缓存的 ResourceManager 实例。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.Culture">
-            <summary>
-              重写当前线程的 CurrentUICulture 属性
-              重写当前线程的 CurrentUICulture 属性。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.EmailAddress">
-            <summary>
-              查找类似 {PropertyName}不是正确的邮箱格式 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.Length">
-            <summary>
-              查找类似 {PropertyName}应为{MinLength}到{MaxLength}个字符 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.NotEmpty">
-            <summary>
-              查找类似 {PropertyName}是必填的 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Templates.WebAPI.Resources.Validation.NotNull">
-            <summary>
-              查找类似 {PropertyName}不能为空 的本地化字符串。
-            </summary>
-        </member>
-        <member name="M:Templates.WebAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Templates.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             该方法由运行时调用，用来向容器添加服务
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:Templates.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Templates.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             该方法由运行时调用，用来配置HTTP请求管道（中间件）
             </summary>

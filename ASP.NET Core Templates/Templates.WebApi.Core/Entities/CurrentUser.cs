@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Templates.WebAPI.Entities
+namespace Templates.WebApi.Core.Entities
 {
     public class CurrentUser
     {

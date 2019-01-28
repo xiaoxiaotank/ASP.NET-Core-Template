@@ -9,9 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Templates.Application.Users;
 using Templates.Common.Models;
-using Templates.WebAPI.Dtos.Accounts;
+using Templates.WebApi.Core.Controllers;
+using Templates.WebApi.Dtos.Accounts;
 
-namespace Templates.WebAPI.Controllers
+namespace Templates.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class AccountsController : ApiController
@@ -30,7 +31,7 @@ namespace Templates.WebAPI.Controllers
         /// <param name="dto"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("login")]
         [AllowAnonymous]
         public ActionResult<AccountDto> Login([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
@@ -56,14 +57,14 @@ namespace Templates.WebAPI.Controllers
             };
         }
 
-        [HttpDelete]
+        [HttpDelete("logout")]
         public void Logout()
         {
 
         }
 
 
-        [HttpPut]
+        [HttpPut("changepwd")]
         public void ChangePassword([FromBody]ChangePasswordDto dto)
         {
 

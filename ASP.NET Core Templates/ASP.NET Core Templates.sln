@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.WebAPI", "Templates.WebAPI\Templates.WebAPI.csproj", "{79AEBE54-9FF7-4E7B-8EA8-A54B0CB93F8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.WebApi", "Templates.WebAPI\Templates.WebApi.csproj", "{79AEBE54-9FF7-4E7B-8EA8-A54B0CB93F8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Application", "Templates.Service\Templates.Application.csproj", "{16CC5E6C-E848-49B0-9FA3-E6E59BF89669}"
 EndProject
@@ -11,13 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Core", "Templates
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.EntityFrameworkCore", "Templates.EntityFramework\Templates.EntityFrameworkCore.csproj", "{B36359BB-2D78-4F8F-8512-7E3F3FD2A928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates.Common", "Templates.Common\Templates.Common.csproj", "{184DEE26-C857-4AC5-B535-0D40226CA785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Common", "Templates.Common\Templates.Common.csproj", "{184DEE26-C857-4AC5-B535-0D40226CA785}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-应用程序", "01-应用程序", "{30A82B7A-9BDC-438E-B9D8-A4C518D00DF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-应用服务", "02-应用服务", "{F7A5F65E-876A-4C3F-9C18-1358E6CB43FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-应用公共", "03-应用公共", "{8F66904B-C997-4BD5-889D-C9859E5A9A60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates.WebApi.Core", "Templates.WebApi.Core\Templates.WebApi.Core.csproj", "{E5D82378-6352-4284-80FA-7641EC6DFC70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{184DEE26-C857-4AC5-B535-0D40226CA785}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{184DEE26-C857-4AC5-B535-0D40226CA785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{184DEE26-C857-4AC5-B535-0D40226CA785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D82378-6352-4284-80FA-7641EC6DFC70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D82378-6352-4284-80FA-7641EC6DFC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D82378-6352-4284-80FA-7641EC6DFC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D82378-6352-4284-80FA-7641EC6DFC70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{788E2EBB-F76E-49C3-AC8F-13CAF3B5BCEE} = {F7A5F65E-876A-4C3F-9C18-1358E6CB43FC}
 		{B36359BB-2D78-4F8F-8512-7E3F3FD2A928} = {F7A5F65E-876A-4C3F-9C18-1358E6CB43FC}
 		{184DEE26-C857-4AC5-B535-0D40226CA785} = {8F66904B-C997-4BD5-889D-C9859E5A9A60}
+		{E5D82378-6352-4284-80FA-7641EC6DFC70} = {30A82B7A-9BDC-438E-B9D8-A4C518D00DF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDF22D22-0FB8-421F-9497-06DA722381D3}

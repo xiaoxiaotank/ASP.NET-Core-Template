@@ -9,12 +9,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Templates.WebAPI.Attributes.Filters
+namespace Templates.WebApi.Core.Attributes.Filters
 {
     /// <summary>
     /// 异常处理过滤器（捕获会话所有异常）
     /// </summary>
-    internal class ExceptionHandlerFilterAttribute : ExceptionFilterAttribute
+    public class ExceptionHandlerFilterAttribute : ExceptionFilterAttribute
     {
         private static readonly IReadOnlyDictionary<Type, (int StatusCode, string Value)> _mappingDic = new Dictionary<Type, (int StatusCode, string Value)>()
         {

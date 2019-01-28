@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Templates.Common.Extensions
 {
@@ -31,6 +32,12 @@ namespace Templates.Common.Extensions
             return string.Join(separator, descs);
         }
 
+        /// <summary>
+        /// 获取枚举值的display name
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static string GetDisplayName(this Enum value, string separator = ",")
         {
             var type = value.GetType();
@@ -45,6 +52,28 @@ namespace Templates.Common.Extensions
                 });
 
             return string.Join(separator, displayNames);
+        }
+
+        /// <summary>
+        /// 获取枚举值的enum member name
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string GetMemberValue(this Enum value, string separator = ",")
+        {
+            var type = value.GetType();
+            var memberValues = value.ToString()
+                .Split(',')
+                .Select(name =>
+                {
+                    var memberValue = type.GetField(name.Trim(' '))?
+                        .GetCustomAttribute<EnumMemberAttribute>()?
+                        .Value;
+                    return memberValue ?? name;
+                });
+
+            return string.Join(separator, memberValues);
         }
     }
 }

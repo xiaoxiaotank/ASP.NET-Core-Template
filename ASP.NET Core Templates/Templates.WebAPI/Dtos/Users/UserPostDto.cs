@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Templates.WebAPI.Resources;
+using Templates.WebApi.Core.Resources;
 
-namespace Templates.WebAPI.Dtos.Users
+namespace Templates.WebApi.Dtos.Users
 {
     /// <summary>
     /// 用户创建
