@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Templates.EntityFrameworkCore.Entities;
+using Templates.EntityFrameworkCore.Repositories;
 
 namespace Templates.Core.Repositories.Users
 {

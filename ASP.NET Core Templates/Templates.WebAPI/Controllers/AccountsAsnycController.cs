@@ -15,11 +15,11 @@ using Templates.WebApi.Dtos.Accounts;
 namespace Templates.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class AccountsController : ApiController
+    public class AccountsAsyncController : ApiController
     {
         private readonly IUserAppService _userAppService;
 
-        public AccountsController(IUserAppService userAppService)
+        public AccountsAsyncController(IUserAppService userAppService)
         {
             _userAppService = userAppService;
         }
@@ -33,10 +33,10 @@ namespace Templates.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("login")]
         [AllowAnonymous]
-        public ActionResult<AccountDto> Login([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
+        public async Task<ActionResult<AccountDto>> LoginAsync([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
-            var user = _userAppService.Login(dto.UserNameOrEmail, dto.Password);
-            if(user == null)
+            var user = await _userAppService.LoginAsync(dto.UserNameOrEmail, dto.Password);
+            if (user == null)
             {
                 throw new AppException("用户名或密码错误！");
             }
@@ -64,7 +64,7 @@ namespace Templates.WebApi.Controllers
         [HttpPut("changepwd")]
         public void ChangePassword([FromBody]ChangePasswordDto dto)
         {
-            _userAppService.ChangePassword(dto.Id, dto.OldPassword, dto.NewPassword);
+
         }
     }
 }

@@ -17,5 +17,11 @@ namespace Templates.Common.Models
         /// 用户名
         /// </summary>
         public string UserName { get; set; }
+
+        public TokenModel(string userId, string userName)
+        {
+            UserId = userId;
+            UserName = userName;
+        }
     }
 }

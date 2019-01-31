@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-应用服务", "02-应�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-应用公共", "03-应用公共", "{8F66904B-C997-4BD5-889D-C9859E5A9A60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates.WebApi.Core", "Templates.WebApi.Core\Templates.WebApi.Core.csproj", "{E5D82378-6352-4284-80FA-7641EC6DFC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.WebApi.Core", "Templates.WebApi.Core\Templates.WebApi.Core.csproj", "{E5D82378-6352-4284-80FA-7641EC6DFC70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
