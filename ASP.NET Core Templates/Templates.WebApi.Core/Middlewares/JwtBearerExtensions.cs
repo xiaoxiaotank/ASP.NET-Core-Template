@@ -1,5 +1,6 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using Templates.Common;
 using Templates.Common.Models;
 
@@ -48,12 +50,22 @@ namespace Microsoft.Extensions.DependencyInjection
                 ValidIssuer = issuer,
                 ValidAudience = audience,
                 IssuerSigningKey = issuerSigningKey,
+                //默认是5分钟，过期时间 = ClockSkew + exp
+                ClockSkew = TimeSpan.FromSeconds(0)
             };
 
             services.AddAuthentication(Scheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = tokenValidationParameters;
+                options.Events = new JwtBearerEvents()
+                {
+                    OnAuthenticationFailed = ctx =>
+                    {
+                        ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        return ctx.Response.WriteAsync("Token无效");
+                    }
+                };
             });
         }
 
@@ -68,7 +80,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Ensure.NotNull(model, nameof(model));
             Ensure.NotNull(configuration, nameof(configuration));
 
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var root = configuration.GetSection(Config_Root_Name);
             var issuer = root[Issuer_Name];
             var audience = root[Audience_Name];

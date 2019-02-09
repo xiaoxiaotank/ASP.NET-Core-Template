@@ -12,7 +12,7 @@ namespace Templates.WebApi.Core.Controllers
 {
     [Route("api")]
     [Produces("application/json")]
-    //[Authorize]
+    [Authorize]
     public class ApiController : ControllerBase
     {
         public CurrentUser CurrentUser => new CurrentUser
