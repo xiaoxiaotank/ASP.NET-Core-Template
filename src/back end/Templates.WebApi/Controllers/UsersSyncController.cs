@@ -16,14 +16,14 @@ using Templates.WebApi.Dtos.Users;
 namespace Templates.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : ApiController
+    public class UsersSyncController : ApiController
     {
         private readonly IUserAppService _userAppService;
-        private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<UsersSyncController> _logger;
 
-        public UsersController(
+        public UsersSyncController(
             IUserAppService userAppService, 
-            ILogger<UsersController> logger)
+            ILogger<UsersSyncController> logger)
         {
             _userAppService = userAppService;
             _logger = logger;

@@ -15,11 +15,11 @@ using Templates.WebApi.Dtos.Accounts;
 namespace Templates.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class AccountsAsyncController : ApiController
+    public class AccountsController : ApiController
     {
         private readonly IUserAppService _userAppService;
 
-        public AccountsAsyncController(IUserAppService userAppService)
+        public AccountsController(IUserAppService userAppService)
         {
             _userAppService = userAppService;
         }

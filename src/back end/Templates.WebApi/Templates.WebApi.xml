@@ -4,7 +4,7 @@
         <name>Templates.WebApi</name>
     </assembly>
     <members>
-        <member name="M:Templates.WebApi.Controllers.AccountsAsyncController.LoginAsync(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Templates.WebApi.Controllers.AccountsController.LoginAsync(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             登录
             使用GET会导致密码显示在URL中
@@ -13,7 +13,7 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebApi.Controllers.AccountsController.Login(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Templates.WebApi.Controllers.AccountsSyncController.Login(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             登录
             使用GET会导致密码显示在URL中
@@ -22,7 +22,7 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebApi.Controllers.UsersAsyncController.GetAsync(System.Int32)">
+        <member name="M:Templates.WebApi.Controllers.UsersController.GetAsync(System.Int32)">
             <summary>
             根据id获取用户
             </summary>
@@ -30,14 +30,14 @@
             <returns></returns>
             <resonse code="404">指定id的用户不存在</resonse>
         </member>
-        <member name="M:Templates.WebApi.Controllers.UsersAsyncController.PostAsync(Templates.WebApi.Dtos.Users.UserPostDto)">
+        <member name="M:Templates.WebApi.Controllers.UsersController.PostAsync(Templates.WebApi.Dtos.Users.UserPostDto)">
             <summary>
             添加用户
             </summary>
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebApi.Controllers.UsersController.Get(System.Int32)">
+        <member name="M:Templates.WebApi.Controllers.UsersSyncController.Get(System.Int32)">
             <summary>
             根据id获取用户
             </summary>
@@ -45,7 +45,7 @@
             <returns></returns>
             <resonse code="404">指定id的用户不存在</resonse>
         </member>
-        <member name="M:Templates.WebApi.Controllers.UsersController.Post(Templates.WebApi.Dtos.Users.UserPostDto)">
+        <member name="M:Templates.WebApi.Controllers.UsersSyncController.Post(Templates.WebApi.Dtos.Users.UserPostDto)">
             <summary>
             添加用户
             </summary>
