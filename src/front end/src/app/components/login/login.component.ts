@@ -25,6 +25,6 @@ export class LoginComponent implements OnInit {
 
   login(): void{
     this.accountService.login(this.user)
-      .subscribe(() => location.href = '/')
+      .subscribe(_ => console.log(_))
   }
 }

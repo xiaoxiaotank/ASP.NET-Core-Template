@@ -56,6 +56,6 @@ export class UserService {
   }
 
   private log(message: string){
-    alert(`HeroService: ${message}`);
+    alert(message);
   }
 }
