@@ -64,6 +64,17 @@ namespace Templates.WebApi
                 options.IncludeXmlComments(commentFilePath);
             });
 
+            services.AddCors(options => 
+            {
+                options.AddPolicy("angular", p =>
+                {
+                    p.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
             services.AddMvc(options => 
             {
                 options.Filters.Add<ExceptionHandlerFilterAttribute>();
@@ -124,6 +135,11 @@ namespace Templates.WebApi
             loggerFactory.AddNLog();
             NLog.LogManager.LoadConfiguration("Configs/nlog.config");
 
+            app.UseCors("angular");
+            //app.UseCors(builder =>
+            //{
+            //    builder.AllowAnyOrigin();
+            //});
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();

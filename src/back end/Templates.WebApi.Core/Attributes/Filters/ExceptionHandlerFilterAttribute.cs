@@ -40,7 +40,7 @@ namespace Templates.WebApi.Core.Attributes.Filters
             if (exception is AppException)
             {
                 var ex = exception as AppException;
-                result.StatusCode = StatusCodes.Status200OK;
+                result.StatusCode = StatusCodes.Status400BadRequest;
                 result.Value = ex.Message;
             }
             else if (_mappingDic.TryGetValue(exception.GetType(), out var tuple))

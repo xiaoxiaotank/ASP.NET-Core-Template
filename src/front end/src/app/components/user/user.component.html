@@ -1,0 +1,17 @@
+<!-- <div>
+  <label>用户名:
+    <input [(ngModel)]="user.userName" >
+  </label>
+  <label>姓名:
+    <input [(ngModel)]="user.name" >
+  </label>
+  <button (click)="create()">新增</button>
+</div> -->
+<li *ngFor="let user of users">
+  <ul>{{user.id}}</ul>
+  <ul>{{user.userName}}</ul>
+  <ul>{{user.name}}</ul>
+  <ul>{{user.email}}</ul>
+  <ul>{{user.creationTime | date: 'yyyy年MM月dd日 HH:mm:ss'}}</ul>
+</li>
+

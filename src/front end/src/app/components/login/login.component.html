@@ -1,0 +1,9 @@
+<div>
+  <label>用户名或邮箱：
+    <input [(ngModel)]="user.userNameOrEmail" >
+  </label>
+  <label>密码：
+    <input [(ngModel)]="user.password" type="password">
+  </label>
+</div>
+<button (click)="login()">登录</button>
