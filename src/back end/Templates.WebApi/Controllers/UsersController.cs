@@ -36,7 +36,7 @@ namespace Templates.WebApi.Controllers
             return _userAppService.Get().Select(u => (UserDto)u);
         }
 
-        [HttpGet("getby")]
+        [HttpGet("by")]
         public IEnumerable<UserDto> Get([FromBody]UserQueryDto query)
         {
             var queryExp = GetQueryExpression(query);

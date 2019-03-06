@@ -43,14 +43,12 @@ namespace Templates.Application.Users
 
         public User Login(string userNameOrEmail, string password)
         {
-            password = CryptographyHelper.EncryptByMD5(password);
-            return _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && u.Password.Equals(password)).FirstOrDefault();
+            return _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && PasswordHasher.VerifyPassword(password, u.Password)).FirstOrDefault();
         }
 
         public async Task<User> LoginAsync(string userNameOrEmail, string password)
         {
-            password = CryptographyHelper.EncryptByMD5(password);
-            return await _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && u.Password.Equals(password)).FirstOrDefaultAsync();
+            return await _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && PasswordHasher.VerifyPassword(password, u.Password)).FirstOrDefaultAsync();
         }
 
         public void ChangePassword(int id, string oldPassword, string newPassword)
@@ -60,12 +58,12 @@ namespace Templates.Application.Users
             {
                 throw new NotFoundException();
             }
-            if(user.Password != CryptographyHelper.EncryptByMD5(oldPassword))
+            if(PasswordHasher.VerifyPassword(oldPassword, user.Password))
             {
                 throw new AppException("旧密码不正确！");
             }
 
-            user.Password = CryptographyHelper.EncryptByMD5(newPassword);
+            user.Password = PasswordHasher.HashPassword(newPassword);
             _userRepository.Update(user);
         }
 
@@ -76,24 +74,33 @@ namespace Templates.Application.Users
             {
                 throw new NotFoundException();
             }
-            if (user.Password != CryptographyHelper.EncryptByMD5(oldPassword))
+            if (PasswordHasher.VerifyPassword(oldPassword, user.Password))
             {
                 throw new AppException("旧密码不正确！");
             }
 
-            user.Password = CryptographyHelper.EncryptByMD5(newPassword);
+            user.Password = PasswordHasher.HashPassword(newPassword);
             await _userRepository.UpdateAsync(user);
         }
 
         public User Create(User user)
         {
-            user.Password = CryptographyHelper.EncryptByMD5(DefaultPassword);
+            user.Password = PasswordHasher.HashPassword(DefaultPassword);
             return _userRepository.Insert(user);
         }
         public async Task<User> CreateAsync(User user)
         {
-            user.Password = CryptographyHelper.EncryptByMD5(DefaultPassword);
+            user.Password = PasswordHasher.HashPassword(DefaultPassword);
             return await _userRepository.InsertAsync(user);
+        }
+
+        public void Create(IEnumerable<User> user)
+        {
+            _userRepository.Insert(user.Select(u =>
+            {
+                u.Password = PasswordHasher.HashPassword(DefaultPassword);
+                return u;
+            }));
         }
 
         public User Update(User user)
@@ -129,7 +136,6 @@ namespace Templates.Application.Users
         public async Task DeleteAsync(int id) => await _userRepository.DeleteAsync(_userRepository.Get(id));
 
         public async Task DeleteAsync(IEnumerable<int> ids) => await _userRepository.DeleteAsync(_userRepository.Get(u => ids.Contains(u.Id)));
-
 
     }
 }

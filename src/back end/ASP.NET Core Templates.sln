@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-应用公共", "03-应�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.WebApi.Core", "Templates.WebApi.Core\Templates.WebApi.Core.csproj", "{E5D82378-6352-4284-80FA-7641EC6DFC70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates.Tests", "Templates.Test\Templates.Tests.csproj", "{03269AFD-1E74-4856-85D5-3B6B81EC5D69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Templates.Tests", "Templates.Tests\Templates.Tests.csproj", "{03269AFD-1E74-4856-85D5-3B6B81EC5D69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-应用测试", "04-应用测试", "{87815F92-A4E3-423C-962C-7AC5B302F38A}"
 EndProject

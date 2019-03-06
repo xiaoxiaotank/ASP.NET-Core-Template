@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Templates.EntityFrameworkCore.Entities;
@@ -17,6 +18,16 @@ namespace Templates.Core.Repositories.Users
         {
             entity.CreationTime = DateTime.Now;
             return base.Insert(entity);
+        }
+
+        public override void Insert(IEnumerable<User> entities)
+        {
+            var now = DateTime.Now;
+            base.Insert(entities.Select(e => 
+            {
+                e.CreationTime = now;
+                return e;
+            }));
         }
     }
 }

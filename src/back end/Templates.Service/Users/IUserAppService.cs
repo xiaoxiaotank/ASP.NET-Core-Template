@@ -36,6 +36,8 @@ namespace Templates.Application.Users
 
         User Create(User user);
 
+        void Create(IEnumerable<User> user);
+
         Task<User> CreateAsync(User user);
 
         User Update(User user);

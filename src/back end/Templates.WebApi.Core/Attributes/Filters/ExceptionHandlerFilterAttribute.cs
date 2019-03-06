@@ -34,7 +34,6 @@ namespace Templates.WebApi.Core.Attributes.Filters
         public override void OnException(ExceptionContext context)
         {
             var exception = context.Exception;
-            _logger.LogError(exception, exception.Message);
             var result = new ObjectResult("An error has occurred.");
 
             if (exception is AppException)
@@ -50,6 +49,8 @@ namespace Templates.WebApi.Core.Attributes.Filters
             }
             else
             {
+                _logger.LogError(exception, exception.Message);
+
                 if (_env.IsDevelopment())
                 {
                     throw exception;

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Templates.WebApi.Core.Attributes.Filters
+namespace Templates.WebApi.Core
 {
     public class MessageHandler : DelegatingHandler
     {
