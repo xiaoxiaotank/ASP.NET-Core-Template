@@ -1,6 +1,7 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,12 +16,18 @@ namespace Templates.WebApi.Core.Controllers
     //[Authorize]
     public class ApiController : ControllerBase
     {
+        
         public CurrentUser CurrentUser => new CurrentUser
         {
             Id = int.Parse(User.FindFirst(JwtClaimTypes.Id).Value),
             UserName = User.FindFirst(JwtClaimTypes.Name).Value
         };
 
+        [HttpDelete]
+        public ActionResult DeleteFiles([FromBody]IEnumerable<string> urls, [FromServices]ILogger<ApiController> logger)
+        {
+            return Ok();
+        }
 
         /// <summary>
         /// 

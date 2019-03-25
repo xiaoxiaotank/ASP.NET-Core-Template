@@ -58,14 +58,14 @@ namespace Templates.EntityFrameworkCore.Repositories
             Save();
         }
 
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity)
         {
             var entry = await _dbSet.AddAsync(entity);
             await SaveAsync();
             return entry.Entity;
         }
 
-        public async Task InsertAsync(IEnumerable<TEntity> entities)
+        public virtual async Task InsertAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
             await SaveAsync();
@@ -84,14 +84,14 @@ namespace Templates.EntityFrameworkCore.Repositories
             Save();
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var entry = await Task.Run(() => _dbSet.Update(entity));
             await SaveAsync();
             return entry.Entity;
         }
 
-        public async Task UpdateAsync(IEnumerable<TEntity> entities)
+        public virtual async Task UpdateAsync(IEnumerable<TEntity> entities)
         {
             await Task.Run(() => _dbSet.UpdateRange(entities));
             await SaveAsync();
@@ -109,13 +109,13 @@ namespace Templates.EntityFrameworkCore.Repositories
             return Save();
         }
 
-        public async Task<int> DeleteAsync(TEntity entity)
+        public virtual async Task<int> DeleteAsync(TEntity entity)
         {
             await Task.Run(() => _dbSet.Remove(entity));
             return await SaveAsync();
         }
 
-        public async Task<int> DeleteAsync(IEnumerable<TEntity> entities)
+        public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities)
         {
             await Task.Run(() => _dbSet.RemoveRange(entities));
             return await SaveAsync();

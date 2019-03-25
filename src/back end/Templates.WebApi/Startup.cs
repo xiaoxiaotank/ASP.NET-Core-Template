@@ -48,7 +48,7 @@ namespace Templates.WebApi
 
             #region 服务依赖注入
             services.AddTransient<IUserAppService, UserAppService>();
-
+            
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<DbContext, MyDbContext>();
             #endregion

@@ -119,7 +119,7 @@ namespace Templates.WebApi.Controllers
             _userAppService.Delete(id);
         }
 
-        [HttpDelete]
+        [HttpDelete("{ids}")]
         public void Delete([FromQuery]IEnumerable<int> ids)
         {
             _userAppService.Delete(ids);

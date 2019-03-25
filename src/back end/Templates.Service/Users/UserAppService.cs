@@ -85,11 +85,21 @@ namespace Templates.Application.Users
 
         public User Create(User user)
         {
+            if(_userRepository.Get(u => u.UserName == user.UserName).Any())
+            {
+                throw new AppException("用户名已存在！");
+            }
+
             user.Password = PasswordHasher.HashPassword(DefaultPassword);
             return _userRepository.Insert(user);
         }
         public async Task<User> CreateAsync(User user)
         {
+            if (await _userRepository.Get(u => u.UserName == user.UserName).AnyAsync())
+            {
+                throw new AppException("用户名已存在！");
+            }
+
             user.Password = PasswordHasher.HashPassword(DefaultPassword);
             return await _userRepository.InsertAsync(user);
         }
