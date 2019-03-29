@@ -44,7 +44,7 @@ namespace Templates.WebApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySql")));
+            services.AddDbContextPool<MyDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySql")));
 
             #region 服务依赖注入
             services.AddTransient<IUserAppService, UserAppService>();
