@@ -21,9 +21,11 @@ namespace Templates.WebApi.Dtos.Users
 
         public bool IsDeleted { get; set; }
 
-        public DateTime? CreationTime { get; set; }
+        public DateTime CreationTime { get; set; }
 
         public DateTime? DeletionTime { get; set; }
+
+        public DateTime LastUpdatedTime { get; set; }
 
         private UserDto(User entity)
         {
@@ -34,6 +36,7 @@ namespace Templates.WebApi.Dtos.Users
             IsDeleted = entity.IsDeleted;
             CreationTime = entity.CreationTime;
             DeletionTime = entity.DeletionTime;
+            LastUpdatedTime = entity.LastUpdatedTime;
         }
 
         public static implicit operator UserDto(User entity) => new UserDto(entity);

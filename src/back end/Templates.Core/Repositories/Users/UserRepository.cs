@@ -14,37 +14,5 @@ namespace Templates.Core.Repositories.Users
         public UserRepository(DbContext ctx) : base(ctx)
         {
         }
-
-        public override User Insert(User entity)
-        {
-            entity.CreationTime = DateTime.Now;
-            return base.Insert(entity);
-        }
-
-        public override void Insert(IEnumerable<User> entities)
-        {
-            var now = DateTime.Now;
-            base.Insert(entities.Select(e => 
-            {
-                e.CreationTime = now;
-                return e;
-            }));
-        }
-
-        public override async Task<User> InsertAsync(User entity)
-        {
-            entity.CreationTime = DateTime.Now;
-            return await base.InsertAsync(entity);
-        }
-
-        public override async Task InsertAsync(IEnumerable<User> entities)
-        {
-            var now = DateTime.Now;
-            await base.InsertAsync(entities.Select(e =>
-            {
-                e.CreationTime = now;
-                return e;
-            }));
-        }
     }
 }

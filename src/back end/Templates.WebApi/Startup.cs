@@ -80,7 +80,6 @@ namespace Templates.WebApi
                 options.Filters.Add<ExceptionHandlerFilterAttribute>();
                 options.Filters.Add<ModelStateValidationFilterAttribute>();
 
-
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .ConfigureApiBehaviorOptions(options =>
@@ -97,7 +96,11 @@ namespace Templates.WebApi
                 //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
 
                 //如果发生404响应，则转到相应连接
-                //options.ClientErrorMapping[404].Link = "https://webapi根本不需要.com/404";
+                //options.ClientErrorMapping[404].Link = "https://webapi感觉根本不需要.com/404";
+            })
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             })
             .AddFluentValidation(config => 
             {
