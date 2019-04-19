@@ -6,23 +6,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
+import { TranslateService, TranslateStore } from '@ngx-translate/core';
 import zh from '@angular/common/locales/zh';
 
 import { AppComponent } from './app.component';
-import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
-import { HeaderComponent } from './components/layout/header/header.component';
-import { WorkspaceComponent } from './components/layout/workspace/workspace.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     LoginComponent,
-    HeaderComponent,
-    WorkspaceComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +27,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     BrowserAnimationsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, TranslateService, TranslateStore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

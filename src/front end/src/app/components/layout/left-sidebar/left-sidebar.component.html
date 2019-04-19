@@ -1,0 +1,88 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <a href="javascript:void(0);" class="brand-link">
+    <img src="assets/imgs/nice-fish.png" alt="Open-WMS Logo" class="brand-image">
+    <span class="brand-text font-weight-light">Open-WMS</span>
+  </a>
+  <div class="sidebar">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
+        <li class="nav-item" dropdown>
+          <a routerLink="dashboard" class="nav-link" dropdown-trigger>
+            <i class="nav-icon fa fa-dashboard"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview" dropdown>
+          <a href="javascript:void(0);" class="nav-link" dropdown-trigger>
+            <i class="nav-icon fa fa-table"></i>
+            <p>库存管理<i class="right fa fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="inventory/inventory-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.inventory' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="inventory/inbound-receipt-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.inbound' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="inventory/outbound-receipt-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.outbound' | translate}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" dropdown>
+          <a href="javascript:void(0);" class="nav-link" dropdown-trigger>
+            <i class="nav-icon fa fa-table"></i>
+            <p>基础数据<i class="right fa fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="basic-data/warehouse-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.warehouseData' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="basic-data/category-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.categoryData' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="basic-data/vendor-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.vendorData' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="basic-data/customer-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.customerData' | translate}}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="basic-data/staff-table/page/1" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{'globalLayout.staffData' | translate}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" dropdown>
+          <a routerLink="sys" class="nav-link" dropdown-trigger>
+            <i class="fa fa-cog nav-icon"></i>
+            <p>{{'user.settings' | translate}}</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
