@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
-import { User } from '../../models/user';
+import { User } from '../../models/user/user';
 import { UserService } from '../../services/user/user.service';
 
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class UserComponent implements OnInit {
+export class UsersComponent implements OnInit {
   users:User[];
   user: User;
 
@@ -18,10 +17,10 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.get();
+    this.get(1, 10);
   }
 
-  get(page = 1, size = 10): void{
+  get(page: number, size : number): void{
     this.userService.get(page, size)
       .subscribe(users => this.users = users);
   }

@@ -68,7 +68,7 @@ namespace Templates.WebApi
             {
                 options.AddPolicy("angular", p =>
                 {
-                    p.WithOrigins("http://localhost:4200")
+                    p.WithOrigins("http://localhost:10000")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

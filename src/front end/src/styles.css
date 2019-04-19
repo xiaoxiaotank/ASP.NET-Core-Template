@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+.ant-row{
+    margin-bottom: 10px !important;
+}
+
+.ant-spin-container{
+    height: 100%;
+}
+
+nz-spin{
+    height: 100%;
+}
+
+.anticon{
+    vertical-align: .125em !important;
+}

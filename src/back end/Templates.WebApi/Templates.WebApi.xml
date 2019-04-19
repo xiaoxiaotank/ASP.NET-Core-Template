@@ -13,6 +13,11 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
+        <member name="T:Templates.WebApi.Controllers.AccountsSyncController">
+            <summary>
+             同步版本演示
+            </summary>
+        </member>
         <member name="M:Templates.WebApi.Controllers.AccountsSyncController.Login(Templates.WebApi.Dtos.Accounts.LoginDto,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             登录
@@ -22,7 +27,7 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Templates.WebApi.Controllers.UsersController.GetAsync(System.Int32)">
+        <member name="M:Templates.WebApi.Controllers.UsersController.GetByIdAsync(System.Int32)">
             <summary>
             根据id获取用户
             </summary>
@@ -36,6 +41,11 @@
             </summary>
             <param name="dto"></param>
             <returns></returns>
+        </member>
+        <member name="T:Templates.WebApi.Controllers.UsersSyncController">
+            <summary>
+            同步版本演示
+            </summary>
         </member>
         <member name="M:Templates.WebApi.Controllers.UsersSyncController.Get(System.Int32)">
             <summary>

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { User } from '../../models/user';
+import { User } from '../../models/user/user';
 
 const Url = 'http://localhost:59146/api/users';
 const httpOptions = {
@@ -20,7 +20,7 @@ export class UserService {
     private http:HttpClient
   ) { }
 
-  get(page: number, size: number):Observable<User[]>{
+  get(page = 1, size = 10):Observable<User[]>{
     return this.http.get<User[]>(`${Url}/?page=${page}&size=${size}`)
       .pipe(
         tap(_ => console.log(_)),

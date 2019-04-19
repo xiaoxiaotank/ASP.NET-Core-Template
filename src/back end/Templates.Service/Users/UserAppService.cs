@@ -43,12 +43,35 @@ namespace Templates.Application.Users
 
         public User Login(string userNameOrEmail, string password)
         {
-            return _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && PasswordHasher.VerifyPassword(password, u.Password)).FirstOrDefault();
+            var user = _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail))).SingleOrDefault();
+            if(user == null)
+            {
+                throw new AppException("用户名或邮箱不存在");
+            }
+
+            if (!PasswordHasher.VerifyPassword(password, user.Password))
+            {
+                throw new AppException("密码错误");
+            }
+
+            user.Password = string.Empty;
+            return user;
         }
 
         public async Task<User> LoginAsync(string userNameOrEmail, string password)
         {
-            return await _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail)) && PasswordHasher.VerifyPassword(password, u.Password)).FirstOrDefaultAsync();
+            var user = await _userRepository.Get(u => (u.UserName.Equals(userNameOrEmail) || u.Email.Equals(userNameOrEmail))).SingleOrDefaultAsync();
+            if (user == null)
+            {
+                throw new AppException("用户名或邮箱不存在");
+            }
+            if (!PasswordHasher.VerifyPassword(password, user.Password))
+            {
+                throw new AppException("密码错误");
+            }
+
+            user.Password = string.Empty;
+            return user;
         }
 
         public void ChangePassword(int id, string oldPassword, string newPassword)

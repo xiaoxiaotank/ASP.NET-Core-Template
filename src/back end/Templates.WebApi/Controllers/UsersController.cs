@@ -19,32 +19,32 @@ namespace Templates.WebApi.Controllers
     public class UsersController : ApiController
     {
         private readonly IUserAppService _userAppService;
-        private readonly ILogger<UsersSyncController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
         public UsersController(
             IUserAppService userAppService,
-            ILogger<UsersSyncController> logger)
+            ILogger<UsersController> logger)
         {
             _userAppService = userAppService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<UserDto> Get()
+        public IEnumerable<UserDto> GetAll()
         {
             _logger.LogInformation("获取所有用户");
             return _userAppService.Get().Select(u => (UserDto)u);
         }
 
         [HttpGet("by")]
-        public IEnumerable<UserDto> Get([FromBody]UserQueryDto query)
+        public IEnumerable<UserDto> GetByQuery([FromBody]UserQueryDto query)
         {
             var queryExp = GetQueryExpression(query);
             return _userAppService.Get(queryExp).Select(u => (UserDto)u);
         }
 
         [HttpGet("page")]
-        public IEnumerable<UserDto> Get([FromQuery]int page = 1, [FromQuery]int size = 20)
+        public IEnumerable<UserDto> GetPaged([FromQuery]int page = 1, [FromQuery]int size = 20)
         {
             return _userAppService.Get()
                 .Paged(page, size)
@@ -52,7 +52,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpGet("pageby")]
-        public IEnumerable<UserDto> Get([FromBody]UserQueryDto query, [FromQuery]int page = 1, [FromQuery]int size = 20)
+        public IEnumerable<UserDto> GetPagedByQuery([FromBody]UserQueryDto query, [FromQuery]int page = 1, [FromQuery]int size = 20)
         {
             var queryExp = GetQueryExpression(query);
             return _userAppService.Get(queryExp)
@@ -70,7 +70,7 @@ namespace Templates.WebApi.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserDto>> GetAsync([FromRoute]int id)
+        public async Task<ActionResult<UserDto>> GetByIdAsync([FromRoute]int id)
         {
             var user = await _userAppService.GetAsync(id);
             if (user == null)
@@ -94,7 +94,7 @@ namespace Templates.WebApi.Controllers
                 Name = dto.Name,
             });
 
-            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(GetByIdAsync), new { id = result.Id }, result);
         }
 
         [HttpPut]

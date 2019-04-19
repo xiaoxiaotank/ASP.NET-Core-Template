@@ -14,6 +14,10 @@ using Templates.WebApi.Dtos.Accounts;
 
 namespace Templates.WebApi.Controllers
 {
+    /// <summary>
+    ///  同步版本演示
+    /// </summary>
+    [Obsolete]
     [Route("api/[controller]")]
     public class AccountsSyncController : ApiController
     {

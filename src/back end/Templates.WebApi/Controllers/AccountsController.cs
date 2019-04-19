@@ -36,10 +36,6 @@ namespace Templates.WebApi.Controllers
         public async Task<ActionResult<AccountDto>> LoginAsync([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
             var user = await _userAppService.LoginAsync(dto.UserNameOrEmail, dto.Password);
-            if (user == null)
-            {
-                throw new AppException("用户名或密码错误！");
-            }
 
             return new AccountDto()
             {
