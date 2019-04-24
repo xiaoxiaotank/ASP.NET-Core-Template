@@ -1,0 +1,51 @@
+<nz-layout>
+  <nz-sider class="left-sidebar" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+    <div class="logo">
+      <nz-avatar class="logo-img" nzIcon="logo" nzSrc="assets/imgs/layout/logo.jpg"></nz-avatar>
+      <div class="logo-text" [ngStyle]="logoTextStyle"><span>Template App</span></div>
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu>
+        <span title><i nz-icon type="user"></i><span class="nav-text">User</span></span>
+        <ul>
+          <li nz-menu-item>Tom</li>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i nz-icon type="team"></i><span class="nav-text">Team</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <span><i nz-icon type="file"></i><span class="nav-text">File</span></span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="sub-layout" [ngStyle]="subLayoutStyle">
+    <nz-header>
+      <i
+        class="trigger"
+        nz-icon
+        [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="setCollapsed()"
+      ></i>
+    </nz-header>
+    <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="content">
+        Bill is a cat.
+      </div>
+    </nz-content>
+    <nz-footer>Template App ©2019 Implement By Jia Jianjun</nz-footer>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i nz-icon type="up"></i>
+</ng-template>
