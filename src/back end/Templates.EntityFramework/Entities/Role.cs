@@ -4,14 +4,13 @@ using System.Text;
 
 namespace Templates.EntityFrameworkCore.Entities
 {
-    public class Role
+    public class Role : Entity
     {
         public Role()
         {
             UserRoles = new HashSet<UserRole>();
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationTime { get; set; }

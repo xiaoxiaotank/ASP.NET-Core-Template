@@ -6,14 +6,13 @@ using System.Text;
 
 namespace Templates.EntityFrameworkCore.Entities
 {
-    public class User
+    public class User : Entity
     {
         public User()
         {
             UserRoles = new HashSet<UserRole>();
         }
 
-        public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }

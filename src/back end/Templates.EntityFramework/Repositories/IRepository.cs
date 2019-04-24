@@ -5,11 +5,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.EntityFrameworkCore.Repositories
 {
+    public interface IRepository<TEntity> : IRepository<TEntity, int>
+        where TEntity : Entity
+    {
+
+    }
+
+
     public interface IRepository<TEntity, TKey> 
-        where TEntity : class
+        where TEntity : class, IEntity<TKey>
         where TKey : IEquatable<TKey>
     {
         int Count();
@@ -38,31 +46,35 @@ namespace Templates.EntityFrameworkCore.Repositories
 
         TEntity Insert(TEntity entity);
 
-        void Insert(IEnumerable<TEntity> entities);
+        int Insert(IEnumerable<TEntity> entities);
 
         Task<TEntity> InsertAsync(TEntity entity);
 
-        Task InsertAsync(IEnumerable<TEntity> entities);
+        Task<int> InsertAsync(IEnumerable<TEntity> entities);
 
         TEntity Update(TEntity entity);
 
-        void Update(IEnumerable<TEntity> entities);
+        int Update(IEnumerable<TEntity> entities);
+
         Task<TEntity> UpdateAsync(TEntity entity);
 
-        Task UpdateAsync(IEnumerable<TEntity> entities);
+        Task<int> UpdateAsync(IEnumerable<TEntity> entities);
 
         int Delete(TEntity entity);
 
+        int Delete(TKey id);
+
         int Delete(IEnumerable<TEntity> entities);
+
+        int Delete(Expression<Func<TEntity, bool>> predicate);
 
         Task<int> DeleteAsync(TEntity entity);
 
+        Task<int> DeleteAsync(TKey id);
+
         Task<int> DeleteAsync(IEnumerable<TEntity> entities);
+
+        Task<int> DeleteAsync(Expression<Func<TEntity, bool>> predicate);
     }
 
-    public interface IRepository<TEntity> : IRepository<TEntity, int>
-        where TEntity : class
-    {
-
-    }
 }

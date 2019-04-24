@@ -24,7 +24,6 @@ namespace Templates.Application.Users
             _userRepository = userRepository;
         }
 
-
         public int Count() => _userRepository.Count();
 
         public int Count(Expression<Func<User, bool>> predicate) => _userRepository.Count(predicate);

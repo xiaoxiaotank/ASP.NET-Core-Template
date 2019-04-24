@@ -9,7 +9,7 @@ using Templates.EntityFrameworkCore.Repositories;
 
 namespace Templates.Core.Repositories.Users
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(DbContext ctx) : base(ctx)
         {
