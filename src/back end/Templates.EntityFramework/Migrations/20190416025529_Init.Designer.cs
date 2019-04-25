@@ -8,7 +8,7 @@ using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.EntityFrameworkCore.Migrations
 {
-    [DbContext(typeof(MyDbContext))]
+    [DbContext(typeof(TemplateDbContext))]
     [Migration("20190416025529_Init")]
     partial class Init
     {

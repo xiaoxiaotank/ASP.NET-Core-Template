@@ -9,10 +9,11 @@ using Templates.EntityFrameworkCore.Repositories;
 
 namespace Templates.Core.Repositories.Users
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : TemplateRepository<User>, IUserRepository
     {
         public UserRepository(DbContext ctx) : base(ctx)
         {
+            
         }
     }
 }

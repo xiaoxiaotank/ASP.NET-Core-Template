@@ -7,7 +7,7 @@ using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.EntityFrameworkCore.Migrations
 {
-    [DbContext(typeof(MyDbContext))]
+    [DbContext(typeof(TemplateDbContext))]
     partial class MyDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

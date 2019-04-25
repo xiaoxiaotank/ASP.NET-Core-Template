@@ -44,13 +44,13 @@ namespace Templates.WebApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<MyDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySql")));
+            services.AddDbContextPool<TemplateDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySql")));
 
             #region 服务依赖注入
             services.AddTransient<IUserAppService, UserAppService>();
             
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<DbContext, MyDbContext>();
+            services.AddTransient<DbContext, TemplateDbContext>();
             #endregion
 
             services.AddJwtBearerAuthentication(Configuration);

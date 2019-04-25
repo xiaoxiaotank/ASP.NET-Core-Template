@@ -11,10 +11,10 @@ namespace Templates.EntityFrameworkCore.Entities
     /// add-migration [name]
     /// update-database
     /// </summary>
-    public class MyDbContext : DbContext
+    public class TemplateDbContext : DbContext
     {
         private const string CurrentTimeStampSql = "CURRENT_TIMESTAMP(6)";
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options){ }
+        public TemplateDbContext(DbContextOptions<TemplateDbContext> options) : base(options){ }
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }

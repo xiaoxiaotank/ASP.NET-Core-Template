@@ -6,7 +6,7 @@ using Templates.EntityFrameworkCore.Repositories;
 
 namespace Templates.Core.Repositories.Users
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : ITemplateRepository<User>
     {
     }
 }
