@@ -1,0 +1,11 @@
+<nz-dropdown [nzPlacement]="'bottomRight'">
+    <div id="user-box" nz-dropdown>
+        <nz-avatar [nzText]="getUserNameFirstCharacter()"></nz-avatar>
+        <span class="user-name">{{account.user.userName}}</span>       
+    </div>
+    <ul class="user-menu" nz-menu nzSelectable>
+      <li nz-menu-item>         
+        <a (click)="logout()"><i nz-icon type="logout"></i>注销</a>
+      </li>
+    </ul>
+  </nz-dropdown>

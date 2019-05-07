@@ -11,7 +11,8 @@ import zh from '@angular/common/locales/zh';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { WorkspaceComponent } from './components/layout/workspace.component';
+import { WorkspaceComponent } from './components/layout/workspace/workspace.component';
+import { HeaderNavUserComponent } from './components/layout/header-nav-user/header-nav-user.component';
 
 registerLocaleData(zh);
 
@@ -20,6 +21,7 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     WorkspaceComponent,
+    HeaderNavUserComponent,
   ],
   imports: [
     BrowserModule,

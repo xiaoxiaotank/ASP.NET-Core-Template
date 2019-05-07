@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Account } from '../../models/app/account';
+
 
 @Injectable({
   providedIn: 'root'
@@ -75,8 +77,8 @@ export class AppService {
   /**
    * 获取当前账户信息
    */
-  static getCurrentAccount() {
-    return JSON.parse(localStorage.getItem(this.Consts.AccountKey));
+  static getCurrentAccount(): Account {
+    return JSON.parse(localStorage.getItem(this.Consts.AccountKey)) as Account;
   }
 }
 

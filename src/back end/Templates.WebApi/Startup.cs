@@ -27,15 +27,15 @@ namespace Templates.WebApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-
-        public IHostingEnvironment HostEnvironment { get; }
-
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             HostEnvironment = env;
         }
+
+        public IConfiguration Configuration { get; }
+
+        public IHostingEnvironment HostEnvironment { get; }
 
 
         /// <summary>
@@ -135,6 +135,7 @@ namespace Templates.WebApi
                 app.UseHsts();
             }
 
+            //使用NLog作为日志记录工具
             loggerFactory.AddNLog();
             NLog.LogManager.LoadConfiguration("Configs/nlog.config");
 

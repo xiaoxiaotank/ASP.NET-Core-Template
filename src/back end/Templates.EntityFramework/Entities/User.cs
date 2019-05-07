@@ -7,12 +7,7 @@ using System.Text;
 namespace Templates.EntityFrameworkCore.Entities
 {
     public class User : Entity
-    {
-        public User()
-        {
-            UserRoles = new HashSet<UserRole>();
-        }
-
+    {     
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
@@ -23,6 +18,6 @@ namespace Templates.EntityFrameworkCore.Entities
         public DateTime LastUpdatedTime { get; set; }
         public DateTime? DeletionTime { get; set; }
 
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
     }
 }

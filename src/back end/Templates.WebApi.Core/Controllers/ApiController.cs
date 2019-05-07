@@ -16,7 +16,6 @@ namespace Templates.WebApi.Core.Controllers
     //[Authorize]
     public class ApiController : ControllerBase
     {
-        
         public CurrentUser CurrentUser => new CurrentUser
         {
             Id = int.Parse(User.FindFirst(JwtClaimTypes.Id).Value),
