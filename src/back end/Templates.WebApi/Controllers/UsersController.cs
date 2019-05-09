@@ -119,8 +119,8 @@ namespace Templates.WebApi.Controllers
             await _userAppService.DeleteAsync(id);
         }
 
-        [HttpDelete("{ids}")]
-        public async Task DeleteAsync([FromQuery]IEnumerable<int> ids)
+        [HttpDelete]
+        public async Task DeleteAsync([FromBody]IEnumerable<int> ids)
         {
             await _userAppService.DeleteAsync(ids);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -27,10 +28,19 @@ namespace Templates.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        private readonly ILogger<Startup> _logger;
+        //private Timer _timer = new Timer((state) => 
+        //{
+        //    throw new Exception();
+        //}, null, 10 * 1000, 1000 * 1000);
+
+        public Startup(ILogger<Startup> logger, IConfiguration configuration, IHostingEnvironment env)
         {
+            _logger = logger;
             Configuration = configuration;
             HostEnvironment = env;
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
         public IConfiguration Configuration { get; }
@@ -132,11 +142,9 @@ namespace Templates.WebApi
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            //使用NLog作为日志记录工具
-            loggerFactory.AddNLog();
             NLog.LogManager.LoadConfiguration("Configs/nlog.config");
 
             app.UseCors("angular");
@@ -147,6 +155,13 @@ namespace Templates.WebApi
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = e.ExceptionObject as Exception;
+            _logger.LogCritical(exception, exception.Message);
         }
     }
 }

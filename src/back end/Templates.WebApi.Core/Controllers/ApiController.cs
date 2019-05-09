@@ -22,7 +22,7 @@ namespace Templates.WebApi.Core.Controllers
             UserName = User.FindFirst(JwtClaimTypes.Name).Value
         };
 
-        [HttpDelete]
+        [HttpDelete("deleteFiles")]
         public ActionResult DeleteFiles([FromBody]IEnumerable<string> urls, [FromServices]ILogger<ApiController> logger)
         {
             return Ok();
