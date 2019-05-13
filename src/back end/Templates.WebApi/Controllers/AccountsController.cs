@@ -33,6 +33,7 @@ namespace Templates.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("login")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<AccountDto>> LoginAsync([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
             var user = await _authAppService.LoginAsync(dto.UserNameOrEmail, dto.Password);
@@ -50,6 +51,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpDelete("logout")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public void Logout()
         {
 
@@ -57,6 +59,7 @@ namespace Templates.WebApi.Controllers
 
 
         [HttpPut("changepwd")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordDto dto)
         {
             await _authAppService.ChangePasswordAsync(dto.Id, dto.OldPassword, dto.NewPassword);

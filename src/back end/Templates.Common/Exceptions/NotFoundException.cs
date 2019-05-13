@@ -7,14 +7,15 @@ namespace System
     [Serializable]
     public class NotFoundException : Exception
     {
+        public override string Message { get; }
+
         public NotFoundException()
         {
-
         }
 
-        public NotFoundException(string message) : base(message)
+        public NotFoundException(string message)
         {
-
+            Message = message;
         }
     }
 }

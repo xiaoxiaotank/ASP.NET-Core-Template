@@ -30,6 +30,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<UserDto> GetAll()
         {
             _logger.LogInformation("获取所有用户");
@@ -37,6 +38,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpGet("by")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<UserDto> GetByQuery([FromBody]UserQueryDto query)
         {
             var queryExp = GetQueryExpression(query);
@@ -44,6 +46,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpGet("page")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<UserDto> GetPaged([FromQuery]int page = 1, [FromQuery]int size = 20)
         {
             return _userAppService.Get()
@@ -52,6 +55,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpGet("pageby")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<UserDto> GetPagedByQuery([FromBody]UserQueryDto query, [FromQuery]int page = 1, [FromQuery]int size = 20)
         {
             var queryExp = GetQueryExpression(query);
@@ -86,6 +90,7 @@ namespace Templates.WebApi.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<UserDto>> PostAsync([FromBody]UserPostDto dto)
         {
             UserDto result = await _userAppService.CreateAsync(new User
@@ -98,7 +103,13 @@ namespace Templates.WebApi.Controllers
             return CreatedAtAction(nameof(GetByIdAsync), new { id = result.Id }, result);
         }
 
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> PutAsync([FromBody]UserPutDto dto)
         {
             await _userAppService.UpdateAsync(new User
@@ -111,7 +122,13 @@ namespace Templates.WebApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Patch([FromBody]UserPatchDto dto)
         {
             await _userAppService.UpdateAsync(new User
@@ -124,7 +141,14 @@ namespace Templates.WebApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteAsync([FromRoute]int id)
         {
             var user = await _userAppService.GetAsync(id);
@@ -138,7 +162,13 @@ namespace Templates.WebApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// 批量删除用户
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteAsync([FromQuery]IEnumerable<int> ids)
         {
             if (ids.IsNotEmpty())

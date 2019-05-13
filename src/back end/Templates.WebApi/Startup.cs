@@ -101,7 +101,7 @@ namespace Templates.WebApi
                 //禁用： ModelState.IsValid 默认行为（触发400响应）
                 //options.SuppressModelStateInvalidFilter = true;
                 //禁用：4XX 响应类型 ProblemDetails
-                //options.SuppressMapClientErrors = true;
+                options.SuppressMapClientErrors = true;
                 //禁用： ModelState.IsValid 400 响应类型 ValidationProblemDetails
                 //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
 

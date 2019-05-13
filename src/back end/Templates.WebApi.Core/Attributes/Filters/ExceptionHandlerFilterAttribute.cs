@@ -17,11 +17,6 @@ namespace Templates.WebApi.Core.Attributes.Filters
     /// </summary>
     public class ExceptionHandlerFilterAttribute : ExceptionFilterAttribute
     {
-        private static readonly IReadOnlyDictionary<Type, (int StatusCode, string Value)> _mappingDic = new Dictionary<Type, (int StatusCode, string Value)>()
-        {
-            [typeof(UnauthorizedAccessException)] = (StatusCodes.Status401Unauthorized, "Unauthorized request"),
-            [typeof(NotFoundException)] = (StatusCodes.Status404NotFound, "Not found"),
-        };
         private readonly ILogger<ExceptionHandlerFilterAttribute> _logger;
         private readonly IHostingEnvironment _env;
 
@@ -34,30 +29,32 @@ namespace Templates.WebApi.Core.Attributes.Filters
         public override void OnException(ExceptionContext context)
         {
             var exception = context.Exception;
-            var result = new ObjectResult("An error has occurred.");
+            IActionResult result = null;
 
-            if (exception is AppException)
+            switch (exception)
             {
-                var ex = exception as AppException;
-                result.StatusCode = StatusCodes.Status400BadRequest;
-                result.Value = ex.Message;
-            }
-            else if (_mappingDic.TryGetValue(exception.GetType(), out var tuple))
-            {
-                result.StatusCode = tuple.StatusCode;
-                result.Value = tuple.Value;
-            }
-            else
-            {
-                _logger.LogError(exception, exception.Message);
+                case AppException ex:
+                    result = new BadRequestObjectResult(ex.Message);
+                    break;
+                case UnauthorizedAccessException ex:
+                    result = new UnauthorizedObjectResult(ex.Message);
+                    break;
+                case NotFoundException ex:
+                    result = new NotFoundObjectResult(ex.Message);
+                    break;
+                default:
+                    _logger.LogError(exception, exception.Message);
 
-                if (_env.IsDevelopment())
-                {
-                    throw exception;
-                }
+                    if (_env.IsDevelopment())
+                    {
+                        throw exception;
+                    }
 
-                result.StatusCode = StatusCodes.Status500InternalServerError;
-                result.Value = "An unhandled server error has occurred.";
+                    result = new ObjectResult("An unhandled server error has occurred.")
+                    {
+                        StatusCode = StatusCodes.Status500InternalServerError
+                    };
+                    break;
             }
 
             context.Result = result;

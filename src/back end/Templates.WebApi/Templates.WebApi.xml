@@ -42,6 +42,34 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="M:Templates.WebApi.Controllers.UsersController.PutAsync(Templates.WebApi.Dtos.Users.UserPutDto)">
+            <summary>
+            更新用户
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Templates.WebApi.Controllers.UsersController.Patch(Templates.WebApi.Dtos.Users.UserPatchDto)">
+            <summary>
+            更新用户
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Templates.WebApi.Controllers.UsersController.DeleteAsync(System.Int32)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Templates.WebApi.Controllers.UsersController.DeleteAsync(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            批量删除用户
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
         <member name="T:Templates.WebApi.Controllers.UsersSyncController">
             <summary>
             同步版本演示

@@ -21,11 +21,6 @@ namespace Templates.Common
         {
             if(param == null)
             {
-                if(message == null)
-                {
-                    throw new NotFoundException();
-                }
-
                 throw new NotFoundException(message);
             }
         }

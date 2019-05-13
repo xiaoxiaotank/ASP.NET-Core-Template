@@ -51,10 +51,8 @@ namespace Templates.Application.Authentications
         public void ChangePassword(int id, string oldPassword, string newPassword)
         {
             var user = _userRepository.Get(id);
-            if (user == null)
-            {
-                throw new NotFoundException();
-            }
+            Ensure.Found(user);
+
             if (!PasswordHasher.VerifyPassword(oldPassword, user.Password))
             {
                 throw new AppException(string.Format(ServiceValidation.Incorrect, "旧密码"));
@@ -67,10 +65,8 @@ namespace Templates.Application.Authentications
         public async Task ChangePasswordAsync(int id, string oldPassword, string newPassword)
         {
             var user = await _userRepository.GetAsync(id);
-            if (user == null)
-            {
-                throw new NotFoundException();
-            }
+            Ensure.Found(user);
+
             if (!PasswordHasher.VerifyPassword(oldPassword, user.Password))
             {
                 throw new AppException(string.Format(ServiceValidation.Incorrect, "旧密码"));
