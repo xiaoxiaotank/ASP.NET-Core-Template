@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.WebApi", "Templates.WebAPI\Templates.WebApi.csproj", "{79AEBE54-9FF7-4E7B-8EA8-A54B0CB93F8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Application", "Templates.Service\Templates.Application.csproj", "{16CC5E6C-E848-49B0-9FA3-E6E59BF89669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Application", "Templates.Application\Templates.Application.csproj", "{16CC5E6C-E848-49B0-9FA3-E6E59BF89669}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Core", "Templates.Core\Templates.Core.csproj", "{788E2EBB-F76E-49C3-AC8F-13CAF3B5BCEE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.EntityFrameworkCore", "Templates.EntityFramework\Templates.EntityFrameworkCore.csproj", "{B36359BB-2D78-4F8F-8512-7E3F3FD2A928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.EntityFrameworkCore", "Templates.EntityFrameworkCore\Templates.EntityFrameworkCore.csproj", "{B36359BB-2D78-4F8F-8512-7E3F3FD2A928}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Common", "Templates.Common\Templates.Common.csproj", "{184DEE26-C857-4AC5-B535-0D40226CA785}"
 EndProject

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Templates.Application.Authentications;
 using Templates.Application.Users;
 using Templates.EntityFrameworkCore.Entities;
 using Templates.WebApi.Controllers;
@@ -15,12 +16,12 @@ namespace Templates.Tests.WebApis
 {
     public class AccountsControllerTest : ApiControllerTest<AccountsController>
     {
-        private readonly Mock<IUserAppService> _mockUserAppService;
+        private readonly Mock<IAuthenticationAppService> _mockAuthAppService;
 
         public AccountsControllerTest()
         {
-            _mockUserAppService = new Mock<IUserAppService>();
-            _controller = new AccountsController(_mockUserAppService.Object);
+            _mockAuthAppService = new Mock<IAuthenticationAppService>();
+            _controller = new AccountsController(_mockAuthAppService.Object);
         }
 
         [Fact]

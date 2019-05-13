@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Templates.WebApi.Core.Resources {
+namespace Templates.Application {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace Templates.WebApi.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Validation {
+    internal class ServiceValidation {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Validation() {
+        internal ServiceValidation() {
         }
         
         /// <summary>
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Templates.WebApi.Core.Resources.Validation", typeof(Validation).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Templates.Application.ServiceValidation", typeof(ServiceValidation).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Templates.WebApi.Core.Resources {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,38 +61,38 @@ namespace Templates.WebApi.Core.Resources {
         }
         
         /// <summary>
-        ///   查找类似 {PropertyName}不是正确的邮箱格式 的本地化字符串。
+        ///   查找类似 {0}已存在 的本地化字符串。
         /// </summary>
-        public static string EmailAddress {
+        internal static string Existing {
             get {
-                return ResourceManager.GetString("EmailAddress", resourceCulture);
+                return ResourceManager.GetString("Existing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 {PropertyName}应为{MinLength}到{MaxLength}个字符 的本地化字符串。
+        ///   查找类似 {0}不正确 的本地化字符串。
         /// </summary>
-        public static string Length {
+        internal static string Incorrect {
             get {
-                return ResourceManager.GetString("Length", resourceCulture);
+                return ResourceManager.GetString("Incorrect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 {PropertyName}是必填的 的本地化字符串。
+        ///   查找类似 {0}不存在 的本地化字符串。
         /// </summary>
-        public static string NotEmpty {
+        internal static string NotExist {
             get {
-                return ResourceManager.GetString("NotEmpty", resourceCulture);
+                return ResourceManager.GetString("NotExist", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 {PropertyName}不能为空 的本地化字符串。
+        ///   查找类似 密码错误 的本地化字符串。
         /// </summary>
-        public static string NotNull {
+        internal static string PasswordError {
             get {
-                return ResourceManager.GetString("NotNull", resourceCulture);
+                return ResourceManager.GetString("PasswordError", resourceCulture);
             }
         }
     }

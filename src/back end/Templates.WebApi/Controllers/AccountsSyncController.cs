@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Templates.Application.Authentications;
 using Templates.Application.Users;
-using Templates.Common.Models;
 using Templates.WebApi.Core.Controllers;
+using Templates.WebApi.Core.Models;
 using Templates.WebApi.Dtos.Accounts;
 
 namespace Templates.WebApi.Controllers
@@ -21,11 +22,11 @@ namespace Templates.WebApi.Controllers
     [Route("api/[controller]")]
     public class AccountsSyncController : ApiController
     {
-        private readonly IUserAppService _userAppService;
+        private readonly IAuthenticationAppService _authAppService;
 
-        public AccountsSyncController(IUserAppService userAppService)
+        public AccountsSyncController(IAuthenticationAppService authAppService)
         {
-            _userAppService = userAppService;
+            _authAppService = authAppService;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Templates.WebApi.Controllers
         [AllowAnonymous]
         public ActionResult<AccountDto> Login([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
-            var user = _userAppService.Login(dto.UserNameOrEmail, dto.Password);
+            var user = _authAppService.Login(dto.UserNameOrEmail, dto.Password);
             if(user == null)
             {
                 throw new AppException("用户名或密码错误！");
@@ -53,8 +54,7 @@ namespace Templates.WebApi.Controllers
                     UserName = user.UserName,
                     Email = user.Email
                 },
-                Jwt = new TokenModel(user.Id.ToString(), user.UserName)
-                    .ToJwtResponse(configuration)
+                Jwt = new TokenModel(user.Id.ToString(), user.UserName).ToJwtResponse(configuration)
             };
         }
 
@@ -66,9 +66,11 @@ namespace Templates.WebApi.Controllers
 
 
         [HttpPut("changepwd")]
-        public void ChangePassword([FromBody]ChangePasswordDto dto)
+        public IActionResult ChangePassword([FromBody]ChangePasswordDto dto)
         {
-            _userAppService.ChangePassword(dto.Id, dto.OldPassword, dto.NewPassword);
+            _authAppService.ChangePassword(dto.Id, dto.OldPassword, dto.NewPassword);
+
+            return NoContent();
         }
     }
 }

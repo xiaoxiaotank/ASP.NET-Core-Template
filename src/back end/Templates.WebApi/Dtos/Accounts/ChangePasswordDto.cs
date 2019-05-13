@@ -24,8 +24,8 @@ namespace Templates.WebApi.Dtos.Accounts
         public ChangePasswordValidator()
         {
             RuleFor(m => m.Id).GreaterThan(0);
-            RuleFor(m => m.OldPassword).NotEmpty().WithMessage(Validation.NotEmpty);
-            RuleFor(m => m.NewPassword).NotEmpty().WithMessage(Validation.NotEmpty).Length(6, 20).WithMessage(Validation.Length);
+            RuleFor(m => m.OldPassword).NotEmpty().WithMessage(DtoValidation.NotEmpty);
+            RuleFor(m => m.NewPassword).NotEmpty().WithMessage(DtoValidation.NotEmpty).Length(6, 20).WithMessage(DtoValidation.Length);
         }
     }
 

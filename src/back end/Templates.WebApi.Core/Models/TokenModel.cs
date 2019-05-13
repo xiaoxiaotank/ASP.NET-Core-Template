@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Templates.Common.Models
+namespace Templates.WebApi.Core.Models
 {
     /// <summary>
     /// 验证令牌

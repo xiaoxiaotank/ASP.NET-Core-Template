@@ -144,7 +144,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         protected virtual void AttachIfNot(IEnumerable<TEntity> entities)
         {
             var detachedEntities = entities.Where(e => !_dbSet.Local.Contains(e));
-            if (detachedEntities.Any())
+            if (detachedEntities.IsNotEmpty())
             {
                 _dbSet.AttachRange(detachedEntities);
             }

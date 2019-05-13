@@ -94,11 +94,12 @@ namespace Templates.WebApi.Controllers
                 Name = dto.Name,
             });
 
+            //返回201并添加Location标头并填充值
             return CreatedAtAction(nameof(GetByIdAsync), new { id = result.Id }, result);
         }
 
         [HttpPut]
-        public async Task PutAsync([FromBody]UserPutDto dto)
+        public async Task<IActionResult> PutAsync([FromBody]UserPutDto dto)
         {
             await _userAppService.UpdateAsync(new User
             {
@@ -106,23 +107,46 @@ namespace Templates.WebApi.Controllers
                 Name = dto.Name,
                 Gender = dto.Gender
             });
+
+            return NoContent();
         }
 
         [HttpPatch]
-        public void Patch([FromBody]UserPatchDto dto)
+        public async Task<IActionResult> Patch([FromBody]UserPatchDto dto)
         {
+            await _userAppService.UpdateAsync(new User
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Gender = dto.Gender
+            });
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task DeleteAsync([FromRoute]int id)
+        public async Task<IActionResult> DeleteAsync([FromRoute]int id)
         {
+            var user = await _userAppService.GetAsync(id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+
             await _userAppService.DeleteAsync(id);
+
+            return NoContent();
         }
 
         [HttpDelete]
-        public async Task DeleteAsync([FromBody]IEnumerable<int> ids)
+        public async Task<IActionResult> DeleteAsync([FromQuery]IEnumerable<int> ids)
         {
-            await _userAppService.DeleteAsync(ids);
+            if (ids.IsNotEmpty())
+            {
+                await _userAppService.DeleteAsync(ids);
+            }
+
+            return NoContent();
         }
 
         #region NoActions

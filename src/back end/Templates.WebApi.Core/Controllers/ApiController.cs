@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Templates.WebApi.Core.Dtos;
-using Templates.WebApi.Core.Entities;
+using Templates.WebApi.Core.Models;
 
 namespace Templates.WebApi.Core.Controllers
 {
     [Route("api")]
     [Produces("application/json")]
+#warning 正式版发布时，需要启用授权验证
     //[Authorize]
     public class ApiController : ControllerBase
     {
-        public CurrentUser CurrentUser => new CurrentUser
+        public CurrentUserModel CurrentUser => new CurrentUserModel
         {
             Id = int.Parse(User.FindFirst(JwtClaimTypes.Id).Value),
             UserName = User.FindFirst(JwtClaimTypes.Name).Value

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Templates.Common.Attributes;
 using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.Application.Users
@@ -31,33 +32,25 @@ namespace Templates.Application.Users
 
         IQueryable<User> Get();
 
-        Task<User> GetAsync(int id);
+        Task<User> GetAsync(int id);     
 
-        User Login(string userNameOrEmail, string password);
+        User Create([NotNull]User user);
 
-        Task<User> LoginAsync(string userNameOrEmail, string password);
+        void Create([NotNull]IEnumerable<User> users);
 
-        void ChangePassword(int id, string oldPassword, string newPassword);
+        Task<User> CreateAsync([NotNull]User user);
 
-        Task ChangePasswordAsync(int id, string oldPassword, string newPassword);
+        User Update([NotNull]User user);
 
-        User Create(User user);
-
-        void Create(IEnumerable<User> user);
-
-        Task<User> CreateAsync(User user);
-
-        User Update(User user);
-
-        Task<User> UpdateAsync(User user);
+        Task<User> UpdateAsync([NotNull]User user);
 
         void Delete(int id);
 
-        void Delete(IEnumerable<int> ids);
+        void Delete([NotNull]IEnumerable<int> ids);
 
         Task DeleteAsync(int id);
 
-        Task DeleteAsync(IEnumerable<int> ids);
+        Task DeleteAsync([NotNull]IEnumerable<int> ids);
 
     }
 }

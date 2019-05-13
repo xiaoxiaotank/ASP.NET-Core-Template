@@ -25,8 +25,8 @@ namespace Templates.WebApi.Dtos.Users
     {
         public UserPostValidator()
         {
-            RuleFor(m => m.UserName).NotNull().WithMessage(Validation.NotNull).Length(2, 8).WithMessage(Validation.Length);
-            RuleFor(m => m.Name).NotNull().WithMessage(Validation.NotNull).Length(2, 4).WithMessage(Validation.Length);
+            RuleFor(m => m.UserName).NotNull().WithMessage(DtoValidation.NotNull).Length(2, 8).WithMessage(DtoValidation.Length);
+            RuleFor(m => m.Name).NotNull().WithMessage(DtoValidation.NotNull).Length(2, 4).WithMessage(DtoValidation.Length);
         }
     }
 }

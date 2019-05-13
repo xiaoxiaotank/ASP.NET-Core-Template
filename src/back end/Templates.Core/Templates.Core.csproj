@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Templates.EntityFramework\Templates.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Templates.EntityFrameworkCore\Templates.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

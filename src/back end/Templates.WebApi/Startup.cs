@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,30 +18,28 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using Templates.Application.Authentications;
 using Templates.Application.Users;
 using Templates.Common.Extensions;
 using Templates.Core.Repositories.Users;
 using Templates.EntityFrameworkCore.Entities;
 using Templates.WebApi.Core.Attributes.Filters;
 
+//会将 Web API 行为应用到程序集中的所有控制器,无法针对单个控制器执行选择退出操作。
 [assembly: ApiController]
 namespace Templates.WebApi
 {
     public class Startup
     {
-        private readonly ILogger<Startup> _logger;
-        //private Timer _timer = new Timer((state) => 
+        //private Timer _timer = new Timer((state) =>
         //{
         //    throw new Exception();
         //}, null, 10 * 1000, 1000 * 1000);
 
-        public Startup(ILogger<Startup> logger, IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            _logger = logger;
             Configuration = configuration;
             HostEnvironment = env;
-
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
         public IConfiguration Configuration { get; }
@@ -58,6 +57,7 @@ namespace Templates.WebApi
 
             #region 服务依赖注入
             services.AddTransient<IUserAppService, UserAppService>();
+            services.AddTransient<IAuthenticationAppService, AuthenticationAppService>();
             
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<DbContext, TemplateDbContext>();
@@ -105,8 +105,27 @@ namespace Templates.WebApi
                 //禁用： ModelState.IsValid 400 响应类型 ValidationProblemDetails
                 //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
 
-                //如果发生404响应，则转到相应连接
-                //options.ClientErrorMapping[404].Link = "https://webapi感觉根本不需要.com/404";
+                //替换404响应 ProbleDetails 的Type属性值
+                //options.ClientErrorMapping[StatusCodes.Status404NotFound].Link = "https://tools.ietf.org/html/rfc7231#section-6.5.4";
+
+                //（使用fluent api无视）当 SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true 时，可以自定义错误响应
+                //options.InvalidModelStateResponseFactory = ctx =>
+                //{
+                //    var problemDetails = new ValidationProblemDetails(ctx.ModelState)
+                //    {
+                //        //提供一个参考文档路径
+                //        Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                //        Title = "出现了一个或多个模型验证错误",
+                //        Status = StatusCodes.Status400BadRequest,
+                //        Detail = "请查看 errors 属性了解详细错误信息",
+                //        Instance = ctx.HttpContext.Request.Path
+                //    };
+                //
+                //    return new BadRequestObjectResult(problemDetails)
+                //    {
+                //        ContentTypes = { "application/proble+json" }
+                //    };
+                //};
             })
             .AddJsonOptions(options =>
             {
@@ -145,8 +164,6 @@ namespace Templates.WebApi
                 //app.UseHsts();
             }
 
-            NLog.LogManager.LoadConfiguration("Configs/nlog.config");
-
             app.UseCors("angular");
             //app.UseCors(builder =>
             //{
@@ -155,13 +172,9 @@ namespace Templates.WebApi
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //不能通过 UseMvc 定义的传统路由或通过 Startup.Configure 中的 UseMvcWithDefaultRoute 访问Web API操作。
         }
 
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            var exception = e.ExceptionObject as Exception;
-            _logger.LogCritical(exception, exception.Message);
-        }
     }
 }

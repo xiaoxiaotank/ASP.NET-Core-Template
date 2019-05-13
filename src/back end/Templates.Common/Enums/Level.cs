@@ -11,26 +11,26 @@ namespace Templates.Common.Enums
     {
         [DisplayName("一级")]
         [Description("最高水平")]
-        One = 0x1,
+        One = 1,
 
         [DisplayName("二级")]
         [Description("较高水平")]
-        Two = 0x2,
+        Two = 2,
 
         [Description("普通水平")]
-        Three = 0x4,
+        Three = 4,
 
         [Description("较差水平")]
-        Four = 0x8,
+        Four = 8,
 
-        Five = 0x10,
+        Five = 16,
 
-        Six = 0x20,
+        Six = 32,
 
         [EnumMember(Value = "7")]
-        Seven = 0x40,
+        Seven = 64,
 
-        Eight = 0x80,
+        Eight = 128,
 
     }
 }

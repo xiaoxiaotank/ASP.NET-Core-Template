@@ -21,8 +21,8 @@ namespace Templates.WebApi.Dtos.Accounts
     {
         public LoginValidator()
         {
-            RuleFor(m => m.UserNameOrEmail).NotEmpty().WithMessage(Validation.NotEmpty);
-            RuleFor(m => m.Password).NotEmpty().WithMessage(Validation.NotEmpty);
+            RuleFor(m => m.UserNameOrEmail).NotEmpty().WithMessage(DtoValidation.NotEmpty);
+            RuleFor(m => m.Password).NotEmpty().WithMessage(DtoValidation.NotEmpty);
         }
     }
 }

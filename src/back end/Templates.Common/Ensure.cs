@@ -17,6 +17,19 @@ namespace Templates.Common
             }
         }
 
+        public static void Found<T>(T param, string message = null)
+        {
+            if(param == null)
+            {
+                if(message == null)
+                {
+                    throw new NotFoundException();
+                }
+
+                throw new NotFoundException(message);
+            }
+        }
+
         public static void IsEmail(string value)
         {
             NotNull(value, nameof(value));

@@ -14,16 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Validation.Designer.cs">
-      <DependentUpon>Validation.resx</DependentUpon>
+    <Compile Update="Resources\DtoValidation.Designer.cs">
+      <DependentUpon>DtoValidation.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Validation.resx">
-      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\DtoValidation.resx">
+      <LastGenOutput>DtoValidation.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>

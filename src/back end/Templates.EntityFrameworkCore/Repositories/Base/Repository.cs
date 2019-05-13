@@ -78,7 +78,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         public int Delete(Expression<Func<TEntity, bool>> predicate)
         {
             var entities = Get(predicate);
-            if (entities.Any())
+            if (entities.IsNotEmpty())
             {
                 Delete(entities);
             }
@@ -104,7 +104,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> predicate)
         {
             var entities = Get(predicate);
-            if (entities.Any())
+            if (entities.IsNotEmpty())
             {
                 await DeleteAsync(entities);
             }

@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Templates.Application.Users;
-using Templates.Common.Models;
+using Templates.Application.Authentications;
 using Templates.WebApi.Core.Controllers;
+using Templates.WebApi.Core.Models;
 using Templates.WebApi.Dtos.Accounts;
 
 namespace Templates.WebApi.Controllers
@@ -17,11 +17,11 @@ namespace Templates.WebApi.Controllers
     [Route("api/[controller]")]
     public class AccountsController : ApiController
     {
-        private readonly IUserAppService _userAppService;
+        private readonly IAuthenticationAppService _authAppService;
 
-        public AccountsController(IUserAppService userAppService)
+        public AccountsController(IAuthenticationAppService authAppService)
         {
-            _userAppService = userAppService;
+            _authAppService = authAppService;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Templates.WebApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<AccountDto>> LoginAsync([FromBody]LoginDto dto, [FromServices]IConfiguration configuration)
         {
-            var user = await _userAppService.LoginAsync(dto.UserNameOrEmail, dto.Password);
+            var user = await _authAppService.LoginAsync(dto.UserNameOrEmail, dto.Password);
 
             return new AccountDto()
             {
@@ -45,8 +45,7 @@ namespace Templates.WebApi.Controllers
                     UserName = user.UserName,
                     Email = user.Email
                 },
-                Jwt = new TokenModel(user.Id.ToString(), user.UserName)
-                    .ToJwtResponse(configuration)
+                Jwt = new TokenModel(user.Id.ToString(), user.UserName).ToJwtResponse(configuration)
             };
         }
 
@@ -58,9 +57,11 @@ namespace Templates.WebApi.Controllers
 
 
         [HttpPut("changepwd")]
-        public void ChangePassword([FromBody]ChangePasswordDto dto)
+        public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordDto dto)
         {
+            await _authAppService.ChangePasswordAsync(dto.Id, dto.OldPassword, dto.NewPassword);
 
+            return NoContent();
         }
     }
 }

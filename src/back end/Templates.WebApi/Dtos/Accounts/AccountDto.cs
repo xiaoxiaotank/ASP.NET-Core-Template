@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Templates.EntityFrameworkCore.Entities;
+using Templates.WebApi.Core.Models;
 
 namespace Templates.WebApi.Dtos.Accounts
 {
@@ -11,7 +12,7 @@ namespace Templates.WebApi.Dtos.Accounts
     {
         public UserLoginedDto User { get; set; }
 
-        public JwtResponse Jwt { get; set; }
+        public JwtResponseModel Jwt { get; set; }
     }
 
 

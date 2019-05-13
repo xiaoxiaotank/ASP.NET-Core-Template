@@ -25,9 +25,9 @@ namespace Templates.WebApi.Dtos.Users
     {
         public UserPutValidator()
         {
-            RuleFor(m => m.Id).NotEmpty().WithMessage(Validation.NotEmpty);
-            RuleFor(m => m.Name).NotNull().WithMessage(Validation.NotNull).Length(2, 4).WithMessage(Validation.Length);
-            RuleFor(m => m.Email).EmailAddress().When(m => m.Email != null).WithMessage(Validation.EmailAddress);
+            RuleFor(m => m.Id).NotEmpty().WithMessage(DtoValidation.NotEmpty);
+            RuleFor(m => m.Name).NotNull().WithMessage(DtoValidation.NotNull).Length(2, 4).WithMessage(DtoValidation.Length);
+            RuleFor(m => m.Email).EmailAddress().When(m => m.Email != null).WithMessage(DtoValidation.EmailAddress);
         }
     }
 }

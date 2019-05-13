@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Templates.Common;
-using Templates.Common.Models;
+using Templates.WebApi.Core.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -75,7 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="model"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static JwtResponse ToJwtResponse(this TokenModel model, IConfiguration configuration)
+        public static JwtResponseModel ToJwtResponse(this TokenModel model, IConfiguration configuration)
         {
             Ensure.NotNull(model, nameof(model));
             Ensure.NotNull(configuration, nameof(configuration));
@@ -104,7 +104,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 SigningCredentials = new SigningCredentials(issuerSigningKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var jwtResponse = new JwtResponse()
+            var jwtResponse = new JwtResponseModel()
             {
                 Status = true,
                 AccessToken = new JwtSecurityTokenHandler().CreateEncodedJwt(tokenDescriptor),
@@ -116,14 +116,4 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public class JwtResponse
-    {
-        public bool Status { get; set; }
-
-        public string AccessToken { get; set; }
-
-        public int ExpiresIn { get; set; }
-
-        public string TokenType { get; set; }
-    }
 }

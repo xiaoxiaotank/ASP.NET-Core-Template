@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace System.Linq
+namespace Templates.Common.Extensions
 {
-    public static class CollectionExtensions
+    public static class DictionaryExtensions
     {
-        public static bool IsNullOrEmpty<TSource>(this IEnumerable<TSource> source)
-        {
-            return source == null || !source.Any();
-        }
-
-        public static bool IsNotNullAndEmpty<TSource>(this IEnumerable<TSource> source)
-        {
-            return source != null && source.Any();
-        }
-
         /// <summary>
         /// 通过键获取值
         /// </summary>
@@ -43,16 +32,6 @@ namespace System.Linq
         public static bool ContainsKeySafely<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dic, TKey key)
         {
             return dic != null && key != null && dic.ContainsKey(key);
-        }
-
-        public static bool NotContains<TSource>(this IEnumerable<TSource> source, TSource value)
-        {
-            return !source.Contains(value);
-        }
-
-        public static IQueryable<T> Paged<T>(this IQueryable<T> source, int page, int size)
-        {
-            return source.Skip((page - 1) * size).Take(size);
         }
     }
 }

@@ -102,7 +102,7 @@ namespace Templates.WebApi.Controllers
         }
 
         [HttpPut]
-        public void Put([FromBody]UserPutDto dto)
+        public IActionResult Put([FromBody]UserPutDto dto)
         {
             _userAppService.Update(new User
             {
@@ -110,23 +110,40 @@ namespace Templates.WebApi.Controllers
                 Name = dto.Name,
                 Gender = dto.Gender
             });
+
+            return NoContent();
         }
 
         [HttpPatch]
-        public void Patch([FromBody]UserPatchDto dto)
+        public IActionResult Patch([FromBody]UserPatchDto dto)
         {
+            _userAppService.Update(new User
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Gender = dto.Gender
+            });
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public void Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             _userAppService.Delete(id);
+
+            return NoContent();
         }
 
         [HttpDelete("{ids}")]
-        public void Delete([FromQuery]IEnumerable<int> ids)
+        public IActionResult Delete([FromQuery]IEnumerable<int> ids)
         {
-            _userAppService.Delete(ids);
+            if (ids.IsNotEmpty())
+            {
+                _userAppService.Delete(ids);
+            }
+
+            return NoContent();
         }
 
         #region NoActions

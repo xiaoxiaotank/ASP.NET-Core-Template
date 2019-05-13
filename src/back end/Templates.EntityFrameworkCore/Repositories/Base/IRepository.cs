@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Templates.Common.Attributes;
 using Templates.EntityFrameworkCore.Entities;
 
 namespace Templates.EntityFrameworkCore.Repositories
@@ -102,28 +103,28 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entity">要插入的实体</param>
         /// <returns>实体</returns>
-        TEntity Insert(TEntity entity);
+        TEntity Insert([NotNull]TEntity entity);
 
         /// <summary>
         /// 插入新实体集合
         /// </summary>
         /// <param name="entities">要插入的实体集合</param>
         /// <returns>插入的实体个数</returns>
-        int Insert(IEnumerable<TEntity> entities);
+        int Insert([NotNull]IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 插入新实体
         /// </summary>
         /// <param name="entity">要插入的实体</param>
         /// <returns>实体</returns>
-        Task<TEntity> InsertAsync(TEntity entity);
+        Task<TEntity> InsertAsync([NotNull]TEntity entity);
 
         /// <summary>
         /// 插入新实体集合
         /// </summary>
         /// <param name="entities">要插入的实体集合</param>
         /// <returns>插入的实体个数</returns>
-        Task<int> InsertAsync(IEnumerable<TEntity> entities);
+        Task<int> InsertAsync([NotNull]IEnumerable<TEntity> entities);
         #endregion
 
         #region Update
@@ -132,28 +133,28 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entity">要更新的实体</param>
         /// <returns>实体</returns>
-        TEntity Update(TEntity entity);
+        TEntity Update([NotNull]TEntity entity);
 
         /// <summary>
         /// 更新已存在的实体集合
         /// </summary>
         /// <param name="entities">要更新的实体集合</param>
         /// <returns>更新的实体个数</returns>
-        int Update(IEnumerable<TEntity> entities);
+        int Update([NotNull]IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 更新已存在的实体
         /// </summary>
         /// <param name="entity">要更新的实体</param>
         /// <returns>实体</returns>
-        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync([NotNull]TEntity entity);
 
         /// <summary>
         /// 更新已存在的实体集合
         /// </summary>
         /// <param name="entities">要更新的实体集合</param>
         /// <returns>更新的实体个数</returns>
-        Task<int> UpdateAsync(IEnumerable<TEntity> entities);
+        Task<int> UpdateAsync([NotNull]IEnumerable<TEntity> entities);
         #endregion
 
         #region Delete
@@ -162,7 +163,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entity">要删除的实体</param>
         /// <returns>删除的实体个数</returns>
-        int Delete(TEntity entity);
+        int Delete([NotNull]TEntity entity);
 
         /// <summary>
         /// 根据主键删除实体
@@ -176,7 +177,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entities">要删除的实体集合</param>
         /// <returns>删除的实体个数</returns>
-        int Delete(IEnumerable<TEntity> entities);
+        int Delete([NotNull]IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 根据条件删除实体集合
@@ -191,7 +192,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entity">要删除的实体</param>
         /// <returns>删除的实体个数</returns>
-        Task<int> DeleteAsync(TEntity entity);
+        Task<int> DeleteAsync([NotNull]TEntity entity);
 
         /// <summary>
         /// 根据主键删除实体
@@ -205,7 +206,7 @@ namespace Templates.EntityFrameworkCore.Repositories
         /// </summary>
         /// <param name="entities">要删除的实体集合</param>
         /// <returns>删除的实体个数</returns>
-        Task<int> DeleteAsync(IEnumerable<TEntity> entities);
+        Task<int> DeleteAsync([NotNull]IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 根据条件删除实体集合
