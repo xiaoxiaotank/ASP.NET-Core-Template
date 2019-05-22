@@ -27,6 +27,11 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
+        <member name="T:Templates.WebApi.Controllers.SharedController">
+            <summary>
+            所有与具体业务无关的api均放在此处
+            </summary>
+        </member>
         <member name="M:Templates.WebApi.Controllers.UsersController.GetByIdAsync(System.Int32)">
             <summary>
             根据id获取用户

@@ -15,7 +15,6 @@ using Templates.WebApi.Dtos.Users;
 
 namespace Templates.WebApi.Controllers
 {
-    [Route("api/[controller]")]
     public class UsersController : ApiController
     {
         private readonly IUserAppService _userAppService;

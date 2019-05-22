@@ -11,11 +11,11 @@ using Templates.WebApi.Core.Models;
 
 namespace Templates.WebApi.Core.Controllers
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
 #warning 正式版发布时，需要启用授权验证
     //[Authorize]
-    public class ApiController : ControllerBase
+    public abstract class ApiController : ControllerBase
     {
         public CurrentUserModel CurrentUser => new CurrentUserModel
         {
@@ -23,14 +23,8 @@ namespace Templates.WebApi.Core.Controllers
             UserName = User.FindFirst(JwtClaimTypes.Name).Value
         };
 
-        [HttpDelete("deleteFiles")]
-        public ActionResult DeleteFiles([FromBody]IEnumerable<string> urls, [FromServices]ILogger<ApiController> logger)
-        {
-            return Ok();
-        }
-
         /// <summary>
-        /// 
+        /// 判断查询表达式是否已拼接完成（对表达式进行了初始化）
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TQueryDto"></typeparam>

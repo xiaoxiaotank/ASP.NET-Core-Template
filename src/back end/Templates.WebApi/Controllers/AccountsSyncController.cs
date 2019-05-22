@@ -19,7 +19,6 @@ namespace Templates.WebApi.Controllers
     ///  同步版本演示
     /// </summary>
     [Obsolete]
-    [Route("api/[controller]")]
     public class AccountsSyncController : ApiController
     {
         private readonly IAuthenticationAppService _authAppService;

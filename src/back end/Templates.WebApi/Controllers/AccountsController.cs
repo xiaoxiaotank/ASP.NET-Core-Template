@@ -14,7 +14,6 @@ using Templates.WebApi.Dtos.Accounts;
 
 namespace Templates.WebApi.Controllers
 {
-    [Route("api/[controller]")]
     public class AccountsController : ApiController
     {
         private readonly IAuthenticationAppService _authAppService;
