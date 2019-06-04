@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,14 @@ namespace Templates.WebApi.Controllers
     public class AccountsController : ApiController
     {
         private readonly IAuthenticationAppService _authAppService;
+        private readonly IMapper _mapper;
 
-        public AccountsController(IAuthenticationAppService authAppService)
+        public AccountsController(
+            IAuthenticationAppService authAppService,
+            IMapper mapper)
         {
             _authAppService = authAppService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -39,12 +44,7 @@ namespace Templates.WebApi.Controllers
 
             return new AccountDto()
             {
-                User = new UserLoginedDto()
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
-                },
+                User = _mapper.Map<UserLoginedDto>(user),
                 Jwt = new TokenModel(user.Id.ToString(), user.UserName).ToJwtResponse(configuration)
             };
         }

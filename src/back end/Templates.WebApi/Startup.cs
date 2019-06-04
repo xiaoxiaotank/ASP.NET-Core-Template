@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,7 @@ using Templates.Application.Users;
 using Templates.Common.Extensions;
 using Templates.Core.Repositories.Users;
 using Templates.EntityFrameworkCore.Entities;
+using Templates.WebApi.Configs;
 using Templates.WebApi.Core.Attributes.Filters;
 
 //会将 Web API 行为应用到程序集中的所有控制器,无法针对单个控制器执行选择退出操作。
@@ -62,28 +64,6 @@ namespace Templates.WebApi
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<DbContext, TemplateDbContext>();
             #endregion
-
-            services.AddJwtBearerAuthentication(Configuration);
-
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Info { Title = "Templates.WebAPI", Version = "v1" });
-
-                var commentFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var commentFilePath = Path.Combine(AppContext.BaseDirectory, commentFileName);
-                options.IncludeXmlComments(commentFilePath);
-            });
-
-            services.AddCors(options => 
-            {
-                options.AddPolicy("angular", p =>
-                {
-                    p.WithOrigins("http://localhost:10000")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
-                });
-            });
 
             services.AddMvc(options => 
             {
@@ -139,6 +119,31 @@ namespace Templates.WebApi
                 config.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 //验证复杂对象时不再(不应，否则执行两次)需要使用 SetValidator 
                 config.ImplicitlyValidateChildProperties = true;
+            });
+
+            services.AddJwtBearerAuthentication(Configuration);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("angular", p =>
+                {
+                    p.WithOrigins("http://localhost:10000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
+            //8.x版本直接使用Mapper.Initialize会报错
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "Templates.WebAPI", Version = "v1" });
+
+                var commentFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var commentFilePath = Path.Combine(AppContext.BaseDirectory, commentFileName);
+                options.IncludeXmlComments(commentFilePath);
             });
         }
 

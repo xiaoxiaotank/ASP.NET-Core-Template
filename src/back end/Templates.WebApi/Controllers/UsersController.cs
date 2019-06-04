@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,13 +22,16 @@ namespace Templates.WebApi.Controllers
     {
         private readonly IUserAppService _userAppService;
         private readonly ILogger<UsersController> _logger;
+        private readonly IMapper _mapper;
 
         public UsersController(
             IUserAppService userAppService,
-            ILogger<UsersController> logger)
+            ILogger<UsersController> logger,
+            IMapper mapper)
         {
             _userAppService = userAppService;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,7 +39,8 @@ namespace Templates.WebApi.Controllers
         public IEnumerable<UserDto> GetAll()
         {
             _logger.LogInformation("获取所有用户");
-            return _userAppService.Get().Select(u => (UserDto)u);
+            var result = _userAppService.Get().ProjectTo<UserDto>(_mapper.ConfigurationProvider);
+            return result;
         }
 
         [HttpGet("by")]
@@ -41,7 +48,7 @@ namespace Templates.WebApi.Controllers
         public IEnumerable<UserDto> GetByQuery([FromBody]UserQueryDto query)
         {
             var queryExp = GetQueryExpression(query);
-            return _userAppService.Get(queryExp).Select(u => (UserDto)u);
+            return _userAppService.Get(queryExp).ProjectTo<UserDto>(_mapper.ConfigurationProvider);
         }
 
         [HttpGet("page")]
@@ -50,7 +57,7 @@ namespace Templates.WebApi.Controllers
         {
             return _userAppService.Get()
                 .Paged(page, size)
-                .Select(u => (UserDto)u);
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider);
         }
 
         [HttpGet("pageby")]
@@ -61,7 +68,7 @@ namespace Templates.WebApi.Controllers
             return _userAppService.Get(queryExp)
                 .Skip((page - 1) * size)
                 .Take(size)
-                .Select(u => (UserDto)u);
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider);
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace Templates.WebApi.Controllers
             {
                 return NotFound();
             }
-            return (UserDto)user;
+            return _mapper.Map<UserDto>(user);
         }
 
         /// <summary>
@@ -92,11 +99,13 @@ namespace Templates.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<UserDto>> PostAsync([FromBody]UserPostDto dto)
         {
-            UserDto result = await _userAppService.CreateAsync(new User
-            {
-                UserName = dto.UserName,
-                Name = dto.Name,
-            });
+            var result = _mapper.Map<UserDto>(
+                await _userAppService.CreateAsync(new User
+                {
+                    UserName = dto.UserName,
+                    Name = dto.Name,
+                })
+            );
 
             //返回201并添加Location标头并填充值
             return CreatedAtAction(nameof(GetByIdAsync), new { id = result.Id }, result);

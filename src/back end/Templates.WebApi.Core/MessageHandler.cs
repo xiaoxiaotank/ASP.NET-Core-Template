@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Templates.WebApi.Core
 {
+    /// <summary>
+    /// 未启用
+    /// </summary>
     public class MessageHandler : DelegatingHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

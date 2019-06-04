@@ -11,6 +11,10 @@ namespace Templates.WebApi.Dtos.Users
     /// </summary>
     public class UserDto
     {
+        public UserDto()
+        {
+
+        }
         private UserDto(User entity)
         {
             Id = entity.Id;
