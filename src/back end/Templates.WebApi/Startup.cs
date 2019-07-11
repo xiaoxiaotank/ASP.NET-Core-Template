@@ -137,6 +137,7 @@ namespace Templates.WebApi
             //8.x版本直接使用Mapper.Initialize会报错
             services.AddAutoMapper(typeof(Startup));
 
+#if DEBUG
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info { Title = "Templates.WebAPI", Version = "v1" });
@@ -145,6 +146,7 @@ namespace Templates.WebApi
                 var commentFilePath = Path.Combine(AppContext.BaseDirectory, commentFileName);
                 options.IncludeXmlComments(commentFilePath);
             });
+#endif
         }
 
         /// <summary>
@@ -157,11 +159,13 @@ namespace Templates.WebApi
             if (HostEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+#if DEBUG
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Templates.WebAPI v1");
                 });
+#endif
             }
             else
             {
